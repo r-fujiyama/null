@@ -1,3 +1,3 @@
-module github.com/r-fujiyama/null-type
+module github.com/r-fujiyama/nulltype
 
 go 1.17

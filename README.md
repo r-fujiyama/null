@@ -1,16 +1,16 @@
-# null-type
+# nulltype
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/r-fujiyama/null-type/blob/master/LICENSE)
-[![CI](https://github.com/r-fujiyama/null-type/workflows/CI/badge.svg)](https://github.com/r-fujiyama/null-type/actions?query=workflow%3ACI)
-[![Codecov](https://img.shields.io/codecov/c/github/r-fujiyama/null-type/.svg?style=flat)](https://codecov.io/gh/r-fujiyama/null-type/)
-[![Go Report Card](https://goreportcard.com/badge/github.com/r-fujiyama/null-type?style=flat)](https://goreportcard.com/report/github.com/r-fujiyama/null-type)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/r-fujiyama/nulltype/blob/master/LICENSE)
+[![CI](https://github.com/r-fujiyama/nulltype/workflows/CI/badge.svg)](https://github.com/r-fujiyama/nulltype/actions?query=workflow%3ACI)
+[![Codecov](https://img.shields.io/codecov/c/github/r-fujiyama/nulltype/.svg?style=flat)](https://codecov.io/gh/r-fujiyama/nulltype/)
+[![Go Report Card](https://goreportcard.com/badge/github.com/r-fujiyama/nulltype?style=flat)](https://goreportcard.com/report/github.com/r-fujiyama/nulltype)
 
 ## Guide
 
 ## Installation
 
 ```sh
-$ go get -u github.com/r-fujiyama/null-type
+$ go get -u github.com/r-fujiyama/nulltype
 ```
 
 ### Usage
@@ -22,7 +22,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/r-fujiyama/null-type"
+	"github.com/r-fujiyama/nulltype"
 )
 
 func main() {
@@ -47,4 +47,4 @@ func main() {
 
 ## License
 
-[MIT](https://github.com/r-fujiyama/null-type/blob/master/LICENSE)
+[MIT](https://github.com/r-fujiyama/nulltype/blob/master/LICENSE)
