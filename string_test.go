@@ -1,8 +1,6 @@
 package null
 
-import (
-	"testing"
-)
+import "testing"
 
 func TestNullString(t *testing.T) {
 	t.Run("New nullString", func(t *testing.T) {
