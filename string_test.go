@@ -8,14 +8,8 @@ import (
 )
 
 func TestStringNewString(t *testing.T) {
-	val := NewString("")
-	want := String{String: "", Valid: false}
-	if val != want {
-		t.Fatalf("want %v, but %v:", want, val)
-	}
-
-	val = NewString("foo")
-	want = String{String: "foo", Valid: true}
+	val := NewString("foo", true)
+	want := String{String: "foo", Valid: true}
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}

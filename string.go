@@ -14,8 +14,8 @@ type String struct {
 }
 
 // NewString creates an instance of String.
-func NewString(str string) String {
-	return String{String: str, Valid: str != ""}
+func NewString(str string, valid bool) String {
+	return String{String: str, Valid: valid}
 }
 
 // Scan implements the Scanner interface.
