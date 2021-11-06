@@ -1,4 +1,4 @@
-package null
+package nulltype
 
 import (
 	"database/sql/driver"
@@ -25,11 +25,17 @@ func (s *String) Scan(value interface{}) error {
 		return nil
 	}
 
-	if data, ok := value.([]byte); ok {
-		s.String, s.Valid = *(*string)(unsafe.Pointer(&data)), true
+	s.Valid = true
+	switch data := value.(type) {
+	case string:
+		s.String = data
 		return nil
+	case []byte:
+		s.String = *(*string)(unsafe.Pointer(&data))
+		return nil
+	default:
+		return fmt.Errorf("got data of type %T", value)
 	}
-	return fmt.Errorf("got data of type %T but wanted []uint8", value)
 }
 
 // Value implements the driver Valuer interface.
@@ -41,8 +47,8 @@ func (s *String) Value() (driver.Value, error) {
 }
 
 // MarshalJSON encode the value to JSON.
-func (s *String) MarshalJSON() ([]byte, error) {
-	if s.String == "" || !s.Valid {
+func (s String) MarshalJSON() ([]byte, error) {
+	if !s.Valid {
 		return []byte("null"), nil
 	}
 	return json.Marshal(s.String)
@@ -50,11 +56,16 @@ func (s *String) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON decode data to the value.
 func (s *String) UnmarshalJSON(data []byte) error {
-	var str string
+	var str *string
 	if err := json.Unmarshal(data, &str); err != nil {
 		return err
 	}
-	s.String, s.Valid = str, str != ""
+	s.Valid = str != nil
+	if str == nil {
+		s.String = ""
+	} else {
+		s.String = *str
+	}
 	return nil
 }
 

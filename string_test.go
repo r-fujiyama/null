@@ -1,179 +1,212 @@
-package null
+package nulltype
 
-import "testing"
+import (
+	"bytes"
+	"encoding/json"
+	"strings"
+	"testing"
+)
 
-func TestNullString(t *testing.T) {
-	t.Run("New nullString", func(t *testing.T) {
-		nullString := NewString("")
-		if nullString.String != "" || nullString.Valid {
-			t.Fatalf("null.String wrong. expected=%#v, got=%#v", String{String: "", Valid: false}, nullString)
-		}
-	})
+func TestStringNewString(t *testing.T) {
+	s := NewString("")
+	want := String{String: "", Valid: false}
+	if s != want {
+		t.Fatalf("want %v, but %v:", want, s)
+	}
 
-	t.Run("New notNullString", func(t *testing.T) {
-		nullString := NewString("test")
-		if nullString.String != "test" || !nullString.Valid {
-			t.Fatalf("null.String wrong. expected=%#v, got=%#v", String{String: "test", Valid: true}, nullString)
-		}
-	})
+	s = NewString("foo")
+	want = String{String: "foo", Valid: true}
+	if s != want {
+		t.Fatalf("want %v, but %v:", want, s)
+	}
+}
 
-	t.Run("Scan string", func(t *testing.T) {
-		nullString := String{}
-		err := nullString.Scan([]byte("test"))
-		if err != nil {
-			t.Fatalf("error message wrong. expected=%v, got=%s", nil, err)
-		}
-		if nullString.String != "test" || !nullString.Valid {
-			t.Fatalf("null.String wrong. expected=%#v, got=%#v", String{String: "test", Valid: true}, nullString)
-		}
-	})
+func TestStringScanString(t *testing.T) {
+	s := String{}
+	if err := s.Scan("foo"); err != nil {
+		t.Fatal(err)
+	}
 
-	t.Run("Scan empty string", func(t *testing.T) {
-		nullString := String{}
-		err := nullString.Scan([]byte(""))
-		if err != nil {
-			t.Fatalf("error message wrong. expected=%v, got=%s", nil, err)
-		}
-		if nullString.String != "" || !nullString.Valid {
-			t.Fatalf("null.String wrong. expected=%#v, got=%#v", String{String: "", Valid: true}, nullString)
-		}
-	})
+	want := String{String: "foo", Valid: true}
+	if s != want {
+		t.Fatalf("want %v, but %v:", want, s)
+	}
+}
 
-	t.Run("Scan nil", func(t *testing.T) {
-		nullString := String{}
-		err := nullString.Scan(nil)
-		if err != nil {
-			t.Fatalf("error message wrong. expected=%v, got=%s", nil, err)
-		}
-		if nullString.String != "" && nullString.Valid {
-			t.Fatalf("null.String. expected=%#v, got=%#v", String{String: "", Valid: false}, nullString)
-		}
-	})
+func TestStringScanByte(t *testing.T) {
+	s := String{}
+	if err := s.Scan([]byte("foo")); err != nil {
+		t.Fatal(err)
+	}
 
-	t.Run("Scan no byte data", func(t *testing.T) {
-		nullString := String{}
-		err := nullString.Scan(1)
-		if err == nil || err.Error() != "got data of type int but wanted []uint8" {
-			t.Fatalf("error wrong. expected=%s, got=%s", "got data of type int but wanted []uint8", err)
-		}
-	})
+	want := String{String: "foo", Valid: true}
+	if s != want {
+		t.Fatalf("want %v, but %v:", want, s)
+	}
+}
 
-	t.Run("Value string", func(t *testing.T) {
-		nullString := String{String: "test", Valid: true}
-		str, err := nullString.Value()
-		if str != "test" || err != nil {
-			t.Fatalf("str or err wrong. expected=(str=test, err=nil) , got=(str=%v,err=%v)", str, err)
-		}
-	})
+func TestStringScanEmpty(t *testing.T) {
+	s := String{}
+	if err := s.Scan([]byte("")); err != nil {
+		t.Fatal(err)
+	}
 
-	t.Run("Value empty", func(t *testing.T) {
-		nullString := String{String: "", Valid: true}
-		str, err := nullString.Value()
-		if str != "" || err != nil {
-			t.Fatalf("str or err wrong. expected=(str=, err=<nil>) , got=(str=%v,err=%v)", str, err)
-		}
-	})
+	want := String{String: "", Valid: true}
+	if s != want {
+		t.Fatalf("want %v, but %v:", want, s)
+	}
+}
 
-	t.Run("Value null", func(t *testing.T) {
-		nullString := String{String: "", Valid: false}
-		str, err := nullString.Value()
-		if str != nil || err != nil {
-			t.Fatalf("str or err wrong. expected=(str=<nil>, err=<nil>) , got=(str=%v,err=%v)", str, err)
-		}
-	})
+func TestStringScanNull(t *testing.T) {
+	s := String{}
+	if err := s.Scan(nil); err != nil {
+		t.Fatal(err)
+	}
 
-	t.Run("MarshalJSON string", func(t *testing.T) {
-		nullString := String{String: "test", Valid: true}
-		jsonValue, err := nullString.MarshalJSON()
-		if err != nil {
-			t.Fatal(err)
-		}
-		if string(jsonValue) != "\"test\"" {
-			t.Fatalf("json value wrong. expected=(jsonValue=\"test\") , got=(jsonValue=%s)", jsonValue)
-		}
-	})
+	want := String{String: "", Valid: false}
+	if s != want {
+		t.Fatalf("want %v, but %v:", want, s)
+	}
+}
 
-	t.Run("MarshalJSON empty", func(t *testing.T) {
-		nullString := String{String: "", Valid: true}
-		jsonValue, err := nullString.MarshalJSON()
-		if err != nil {
-			t.Fatal(err)
-		}
-		if string(jsonValue) != "null" {
-			t.Fatalf("json value wrong. expected=(jsonValue=null) , got=(jsonValue=%s)", jsonValue)
-		}
-	})
+func TestStringScanError(t *testing.T) {
+	s := String{}
+	err := s.Scan(1)
+	if err == nil || err.Error() != "got data of type int" {
+		t.Fatalf("want %v, but %v:", "got data of type int", err)
+	}
+}
 
-	t.Run("MarshalJSON null", func(t *testing.T) {
-		nullString := String{String: "", Valid: false}
-		jsonValue, err := nullString.MarshalJSON()
-		if err != nil {
-			t.Fatal(err)
-		}
-		if string(jsonValue) != "null" {
-			t.Fatalf("json value wrong. expected=(jsonValue=null) , got=(jsonValue=%s)", jsonValue)
-		}
-	})
+func TestStringValueString(t *testing.T) {
+	s := String{String: "foo", Valid: true}
+	str, err := s.Value()
+	if str != "foo" || err != nil {
+		t.Fatalf("want %v, but %v:", "foo", str)
+	}
+}
 
-	t.Run("UnmarshalJSON string", func(t *testing.T) {
-		nullString := String{}
-		err := nullString.UnmarshalJSON([]byte("\"test\""))
-		if err != nil {
-			t.Fatal(err)
-		}
-		if nullString.String != "test" || !nullString.Valid {
-			t.Fatalf("null.String wrong. expected=%#v, got=%#v", String{String: "test", Valid: true}, nullString)
-		}
-	})
+func TestStringValueEmpty(t *testing.T) {
+	s := String{String: "", Valid: true}
+	str, err := s.Value()
+	if str != "" || err != nil {
+		t.Fatalf("want %v, but %v:", "", str)
+	}
+}
 
-	t.Run("UnmarshalJSON empty", func(t *testing.T) {
-		nullString := String{}
-		err := nullString.UnmarshalJSON([]byte("\"\""))
-		if err != nil {
-			t.Fatal(err)
-		}
-		if nullString.String != "" || nullString.Valid {
-			t.Fatalf("null.String wrong. expected=%#v, got=%#v", String{String: "", Valid: false}, nullString)
-		}
-	})
+func TestStringValueNull(t *testing.T) {
+	s := String{String: "foo", Valid: false}
+	str, err := s.Value()
+	if str != nil || err != nil {
+		t.Fatalf("want %v, but %v:", "", str)
+	}
+}
 
-	t.Run("UnmarshalJSON null", func(t *testing.T) {
-		nullString := String{}
-		err := nullString.UnmarshalJSON([]byte("null"))
-		if err != nil {
-			t.Fatal(err)
-		}
-		if nullString.String != "" || nullString.Valid {
-			t.Fatalf("null.String wrong. expected=%#v, got=%#v", String{String: "", Valid: false}, nullString)
-		}
-	})
+func TestStringMarshalJSONString(t *testing.T) {
+	s := String{String: "foo", Valid: true}
+	var buf bytes.Buffer
+	if err := json.NewEncoder(&buf).Encode(s); err != nil {
+		t.Fatal(err)
+	}
 
-	t.Run("UnmarshalJSON error", func(t *testing.T) {
-		nullString := String{}
-		err := nullString.UnmarshalJSON([]byte("a"))
-		if err == nil {
-			t.Fatal("no error message is output")
-		}
-	})
+	want := `"foo"`
+	got := strings.TrimSpace(buf.String())
+	if got != want {
+		t.Fatalf("want %v, but %v:", want, got)
+	}
+}
 
-	t.Run("IsEmpty string", func(t *testing.T) {
-		nullString := String{String: "test", Valid: true}
-		if nullString.IsEmpty() {
-			t.Fatal("should not be empty")
-		}
-	})
+func TestStringMarshalJSONEmpty(t *testing.T) {
+	s := String{String: "", Valid: true}
+	var buf bytes.Buffer
+	if err := json.NewEncoder(&buf).Encode(s); err != nil {
+		t.Fatal(err)
+	}
 
-	t.Run("IsEmpty empty", func(t *testing.T) {
-		nullString := String{String: "", Valid: true}
-		if !nullString.IsEmpty() {
-			t.Fatal("it has to be empty")
-		}
-	})
+	want := `""`
+	got := strings.TrimSpace(buf.String())
+	if got != want {
+		t.Fatalf("want %v, but %v:", want, got)
+	}
+}
 
-	t.Run("IsEmpty null", func(t *testing.T) {
-		nullString := String{String: "", Valid: false}
-		if !nullString.IsEmpty() {
-			t.Fatal("it has to be empty")
-		}
-	})
+func TestStringMarshalJSONNull(t *testing.T) {
+	s := String{String: "foo", Valid: false}
+	var buf bytes.Buffer
+	if err := json.NewEncoder(&buf).Encode(s); err != nil {
+		t.Fatal(err)
+	}
+
+	want := "null"
+	got := strings.TrimSpace(buf.String())
+	if got != want {
+		t.Fatalf("want %v, but %v:", want, got)
+	}
+}
+
+func TestStringUnmarshalJSONString(t *testing.T) {
+	var s String
+	err := json.NewDecoder(strings.NewReader(`"foo"`)).Decode(&s)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	want := String{String: "foo", Valid: true}
+	if s != want {
+		t.Fatalf("want %v, but %v:", want, s)
+	}
+}
+
+func TestStringUnmarshalJSONEmpty(t *testing.T) {
+	var s String
+	err := json.NewDecoder(strings.NewReader(`""`)).Decode(&s)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	want := String{String: "", Valid: true}
+	if s != want {
+		t.Fatalf("want %v, but %v:", want, s)
+	}
+}
+
+func TestStringUnmarshalJSONNull(t *testing.T) {
+	var s String
+	err := json.NewDecoder(strings.NewReader("null")).Decode(&s)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	want := String{String: "", Valid: false}
+	if s != want {
+		t.Fatalf("want %v, but %v:", want, s)
+	}
+}
+
+func TestStringUnmarshalJSONError(t *testing.T) {
+	nullString := String{}
+	err := nullString.UnmarshalJSON([]byte("a"))
+	if err == nil {
+		t.Fatal("no error message is output")
+	}
+}
+
+func TestStringIsEmptyString(t *testing.T) {
+	s := String{String: "foo", Valid: true}
+	if s.IsEmpty() {
+		t.Fatal("should not be empty")
+	}
+}
+
+func TestStringIsEmptyEmpty(t *testing.T) {
+	s := String{String: "", Valid: true}
+	if !s.IsEmpty() {
+		t.Fatal("it has to be empty")
+	}
+}
+
+func TestStringIsEmptyNull(t *testing.T) {
+	s := String{String: "", Valid: false}
+	if !s.IsEmpty() {
+		t.Fatal("it has to be empty")
+	}
 }
