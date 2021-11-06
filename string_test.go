@@ -8,103 +8,115 @@ import (
 )
 
 func TestStringNewString(t *testing.T) {
-	s := NewString("")
+	val := NewString("")
 	want := String{String: "", Valid: false}
-	if s != want {
-		t.Fatalf("want %v, but %v:", want, s)
+	if val != want {
+		t.Fatalf("want %v, but %v:", want, val)
 	}
 
-	s = NewString("foo")
+	val = NewString("foo")
 	want = String{String: "foo", Valid: true}
-	if s != want {
-		t.Fatalf("want %v, but %v:", want, s)
-	}
-}
-
-func TestStringScanString(t *testing.T) {
-	s := String{}
-	if err := s.Scan("foo"); err != nil {
-		t.Fatal(err)
-	}
-
-	want := String{String: "foo", Valid: true}
-	if s != want {
-		t.Fatalf("want %v, but %v:", want, s)
-	}
-}
-
-func TestStringScanByte(t *testing.T) {
-	s := String{}
-	if err := s.Scan([]byte("foo")); err != nil {
-		t.Fatal(err)
-	}
-
-	want := String{String: "foo", Valid: true}
-	if s != want {
-		t.Fatalf("want %v, but %v:", want, s)
-	}
-}
-
-func TestStringScanEmpty(t *testing.T) {
-	s := String{}
-	if err := s.Scan([]byte("")); err != nil {
-		t.Fatal(err)
-	}
-
-	want := String{String: "", Valid: true}
-	if s != want {
-		t.Fatalf("want %v, but %v:", want, s)
+	if val != want {
+		t.Fatalf("want %v, but %v:", want, val)
 	}
 }
 
 func TestStringScanNull(t *testing.T) {
-	s := String{}
-	if err := s.Scan(nil); err != nil {
+	val := String{}
+	if err := val.Scan(nil); err != nil {
 		t.Fatal(err)
 	}
 
 	want := String{String: "", Valid: false}
-	if s != want {
-		t.Fatalf("want %v, but %v:", want, s)
+	if val != want {
+		t.Fatalf("want %v, but %v:", want, val)
+	}
+}
+
+func TestStringScanString(t *testing.T) {
+	val := String{}
+	if err := val.Scan("foo"); err != nil {
+		t.Fatal(err)
+	}
+
+	want := String{String: "foo", Valid: true}
+	if val != want {
+		t.Fatalf("want %v, but %v:", want, val)
+	}
+}
+
+func TestStringScanStringEmpty(t *testing.T) {
+	val := String{}
+	if err := val.Scan(""); err != nil {
+		t.Fatal(err)
+	}
+
+	want := String{String: "", Valid: true}
+	if val != want {
+		t.Fatalf("want %v, but %v:", want, val)
+	}
+}
+
+func TestStringScanByte(t *testing.T) {
+	val := String{}
+	if err := val.Scan([]byte("foo")); err != nil {
+		t.Fatal(err)
+	}
+
+	want := String{String: "foo", Valid: true}
+	if val != want {
+		t.Fatalf("want %v, but %v:", want, val)
+	}
+}
+
+func TestStringScanByteEmpty(t *testing.T) {
+	val := String{}
+	if err := val.Scan([]byte("")); err != nil {
+		t.Fatal(err)
+	}
+
+	want := String{String: "", Valid: true}
+	if val != want {
+		t.Fatalf("want %v, but %v:", want, val)
 	}
 }
 
 func TestStringScanError(t *testing.T) {
-	s := String{}
-	err := s.Scan(1)
+	val := String{}
+	err := val.Scan(1)
 	if err == nil || err.Error() != "got data of type int" {
 		t.Fatalf("want %v, but %v:", "got data of type int", err)
 	}
 }
 
 func TestStringValueString(t *testing.T) {
-	s := String{String: "foo", Valid: true}
-	str, err := s.Value()
-	if str != "foo" || err != nil {
-		t.Fatalf("want %v, but %v:", "foo", str)
+	val := String{String: "foo", Valid: true}
+	got, err := val.Value()
+	if got != "foo" || err != nil {
+		t.Fatalf("want %v, but %v:", "foo", got)
 	}
 }
 
 func TestStringValueEmpty(t *testing.T) {
-	s := String{String: "", Valid: true}
-	str, err := s.Value()
-	if str != "" || err != nil {
-		t.Fatalf("want %v, but %v:", "", str)
+	val := String{String: "", Valid: true}
+	got, err := val.Value()
+	if got != "" || err != nil {
+		t.Fatalf("want %v, but %v:", "", got)
 	}
 }
 
 func TestStringValueNull(t *testing.T) {
-	s := String{String: "foo", Valid: false}
-	str, err := s.Value()
-	if str != nil || err != nil {
-		t.Fatalf("want %v, but %v:", "", str)
+	val := String{String: "foo", Valid: false}
+	got, err := val.Value()
+	if got != nil || err != nil {
+		t.Fatalf("want %v, but %v:", "", got)
 	}
 }
 
 func TestStringMarshalJSONString(t *testing.T) {
-	s := String{String: "foo", Valid: true}
+	val := String{String: "foo", Valid: true}
 	var buf bytes.Buffer
-	if err := json.NewEncoder(&buf).Encode(s); err != nil {
+	if err := json.NewEncoder(&buf).Encode(val); err != nil {
 		t.Fatal(err)
 	}
 
@@ -116,9 +128,9 @@ func TestStringMarshalJSONString(t *testing.T) {
 }
 
 func TestStringMarshalJSONEmpty(t *testing.T) {
-	s := String{String: "", Valid: true}
+	val := String{String: "", Valid: true}
 	var buf bytes.Buffer
-	if err := json.NewEncoder(&buf).Encode(s); err != nil {
+	if err := json.NewEncoder(&buf).Encode(val); err != nil {
 		t.Fatal(err)
 	}
 
@@ -130,9 +142,9 @@ func TestStringMarshalJSONEmpty(t *testing.T) {
 }
 
 func TestStringMarshalJSONNull(t *testing.T) {
-	s := String{String: "foo", Valid: false}
+	val := String{String: "foo", Valid: false}
 	var buf bytes.Buffer
-	if err := json.NewEncoder(&buf).Encode(s); err != nil {
+	if err := json.NewEncoder(&buf).Encode(val); err != nil {
 		t.Fatal(err)
 	}
 
@@ -144,69 +156,69 @@ func TestStringMarshalJSONNull(t *testing.T) {
 }
 
 func TestStringUnmarshalJSONString(t *testing.T) {
-	var s String
-	err := json.NewDecoder(strings.NewReader(`"foo"`)).Decode(&s)
+	var val String
+	err := json.NewDecoder(strings.NewReader(`"foo"`)).Decode(&val)
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	want := String{String: "foo", Valid: true}
-	if s != want {
-		t.Fatalf("want %v, but %v:", want, s)
+	if val != want {
+		t.Fatalf("want %v, but %v:", want, val)
 	}
 }
 
 func TestStringUnmarshalJSONEmpty(t *testing.T) {
-	var s String
-	err := json.NewDecoder(strings.NewReader(`""`)).Decode(&s)
+	var val String
+	err := json.NewDecoder(strings.NewReader(`""`)).Decode(&val)
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	want := String{String: "", Valid: true}
-	if s != want {
-		t.Fatalf("want %v, but %v:", want, s)
+	if val != want {
+		t.Fatalf("want %v, but %v:", want, val)
 	}
 }
 
 func TestStringUnmarshalJSONNull(t *testing.T) {
-	var s String
-	err := json.NewDecoder(strings.NewReader("null")).Decode(&s)
+	var val String
+	err := json.NewDecoder(strings.NewReader("null")).Decode(&val)
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	want := String{String: "", Valid: false}
-	if s != want {
-		t.Fatalf("want %v, but %v:", want, s)
+	if val != want {
+		t.Fatalf("want %v, but %v:", want, val)
 	}
 }
 
 func TestStringUnmarshalJSONError(t *testing.T) {
-	nullString := String{}
-	err := nullString.UnmarshalJSON([]byte("a"))
+	val := String{}
+	err := val.UnmarshalJSON([]byte("foo"))
 	if err == nil {
 		t.Fatal("no error message is output")
 	}
 }
 
 func TestStringIsEmptyString(t *testing.T) {
-	s := String{String: "foo", Valid: true}
-	if s.IsEmpty() {
+	val := String{String: "foo", Valid: true}
+	if val.IsEmpty() {
 		t.Fatal("should not be empty")
 	}
 }
 
 func TestStringIsEmptyEmpty(t *testing.T) {
-	s := String{String: "", Valid: true}
-	if !s.IsEmpty() {
+	val := String{String: "", Valid: true}
+	if !val.IsEmpty() {
 		t.Fatal("it has to be empty")
 	}
 }
 
 func TestStringIsEmptyNull(t *testing.T) {
-	s := String{String: "", Valid: false}
-	if !s.IsEmpty() {
+	val := String{String: "", Valid: false}
+	if !val.IsEmpty() {
 		t.Fatal("it has to be empty")
 	}
 }
