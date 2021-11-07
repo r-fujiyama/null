@@ -92,3 +92,11 @@ func (b *Bool) UnmarshalJSON(data []byte) error {
 	}
 	return nil
 }
+
+// String return string indicated the value.
+func (b Bool) String() string {
+	if !b.Valid {
+		return "<null>"
+	}
+	return strconv.FormatBool(b.Bool)
+}

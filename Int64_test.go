@@ -260,3 +260,19 @@ func TestInt64isZeroOrNullNull(t *testing.T) {
 		t.Fatal("it has to be zero or null")
 	}
 }
+
+func TestInt64String(t *testing.T) {
+	val := Int64{Int64: 1, Valid: true}
+	want := "1"
+	got := val.String()
+	if got != want {
+		t.Fatalf("want %v, but %v:", want, got)
+	}
+
+	val = Int64{Int64: 0, Valid: false}
+	want = "<null>"
+	got = val.String()
+	if got != want {
+		t.Fatalf("want %v, but %v:", want, got)
+	}
+}

@@ -91,3 +91,11 @@ func (i *Int32) UnmarshalJSON(data []byte) error {
 func (i *Int32) IsZeroOrNull() bool {
 	return i.Int32 == 0 || !i.Valid
 }
+
+// String return string indicated the value.
+func (i Int32) String() string {
+	if !i.Valid {
+		return "<null>"
+	}
+	return strconv.Itoa(int(i.Int32))
+}
