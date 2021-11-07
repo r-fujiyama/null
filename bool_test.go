@@ -3,8 +3,6 @@ package nulltype
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
-	"strconv"
 	"strings"
 	"testing"
 )
@@ -15,11 +13,6 @@ func TestBoolNewBool(t *testing.T) {
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
-
-	toBool, _ := strconv.ParseBool("asefawe")
-	fmt.Println(toBool) // true
-	b := []byte("0")
-	t.Fatal(b)
 }
 
 func TestBoolScanNull(t *testing.T) {
