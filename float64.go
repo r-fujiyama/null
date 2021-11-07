@@ -63,7 +63,7 @@ func (f *Float64) Scan(value interface{}) error {
 }
 
 // Value implements the driver Valuer interface.
-func (f *Float64) Value() (driver.Value, error) {
+func (f Float64) Value() (driver.Value, error) {
 	if !f.Valid {
 		return nil, nil
 	}

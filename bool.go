@@ -63,7 +63,7 @@ func (b *Bool) Scan(value interface{}) error {
 }
 
 // Value implements the driver Valuer interface.
-func (b *Bool) Value() (driver.Value, error) {
+func (b Bool) Value() (driver.Value, error) {
 	if !b.Valid {
 		return nil, nil
 	}

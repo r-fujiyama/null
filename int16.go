@@ -54,7 +54,7 @@ func (i *Int16) Scan(value interface{}) error {
 }
 
 // Value implements the driver Valuer interface.
-func (i *Int16) Value() (driver.Value, error) {
+func (i Int16) Value() (driver.Value, error) {
 	if !i.Valid {
 		return nil, nil
 	}
