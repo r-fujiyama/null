@@ -87,7 +87,7 @@ func (i *Int32) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-// IsZeroOrEmpty return true if int32 is 0 or Valid is false.
+// IsZeroOrNull return true if int32 is 0 or Valid is false.
 func (i *Int32) IsZeroOrNull() bool {
 	return i.Int32 == 0 || !i.Valid
 }

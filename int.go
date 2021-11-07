@@ -90,7 +90,7 @@ func (i *Int) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-// IsZeroOrEmpty return true if int is 0 or Valid is false.
+// IsZeroOrNull return true if int is 0 or Valid is false.
 func (i *Int) IsZeroOrNull() bool {
 	return i.Int == 0 || !i.Valid
 }
