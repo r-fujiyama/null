@@ -49,7 +49,7 @@ func (i *Int16) Scan(value interface{}) error {
 		i.Int16 = int16(data)
 		return nil
 	default:
-		return fmt.Errorf("got data of type %T", value)
+		return fmt.Errorf("unsupported type: %T", value)
 	}
 }
 

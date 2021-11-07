@@ -52,7 +52,7 @@ func (i *Int32) Scan(value interface{}) error {
 		i.Int32 = data
 		return nil
 	default:
-		return fmt.Errorf("got data of type %T", value)
+		return fmt.Errorf("unsupported type: %T", value)
 	}
 }
 

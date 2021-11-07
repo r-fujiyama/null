@@ -77,9 +77,9 @@ func TestStringScanByteEmpty(t *testing.T) {
 
 func TestStringScanError(t *testing.T) {
 	val := String{}
-	err := val.Scan(1)
-	if err == nil || err.Error() != "got data of type int" {
-		t.Fatalf("want %v, but %v:", "got data of type int", err)
+	err := val.Scan(struct{}{})
+	if err == nil || err.Error() != "unsupported type: struct {}" {
+		t.Fatalf("want %v, but %v:", "unsupported type: struct {}", err)
 	}
 }
 

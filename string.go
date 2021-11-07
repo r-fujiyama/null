@@ -34,7 +34,7 @@ func (s *String) Scan(value interface{}) error {
 		s.Str = *(*string)(unsafe.Pointer(&data))
 		return nil
 	default:
-		return fmt.Errorf("got data of type %T", value)
+		return fmt.Errorf("unsupported type: %T", value)
 	}
 }
 

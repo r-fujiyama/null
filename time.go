@@ -31,7 +31,7 @@ func (t *Time) Scan(value interface{}) error {
 		t.Time = data
 		return nil
 	default:
-		return fmt.Errorf("got data of type %T", value)
+		return fmt.Errorf("unsupported type: %T", value)
 	}
 }
 

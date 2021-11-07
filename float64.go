@@ -58,7 +58,7 @@ func (f *Float64) Scan(value interface{}) error {
 		f.Float64 = data
 		return nil
 	default:
-		return fmt.Errorf("got data of type %T", value)
+		return fmt.Errorf("unsupported type: %T", value)
 	}
 }
 

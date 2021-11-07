@@ -129,8 +129,8 @@ func TestBoolScanByteParseError(t *testing.T) {
 func TestBoolScanTypeError(t *testing.T) {
 	val := Bool{}
 	err := val.Scan(struct{}{})
-	if err == nil || err.Error() != "got data of type struct {}" {
-		t.Fatalf("want %v, but %v:", "got data of type struct {}", err)
+	if err == nil || err.Error() != "unsupported type: struct {}" {
+		t.Fatalf("want %v, but %v:", "unsupported type: struct {}", err)
 	}
 }
 

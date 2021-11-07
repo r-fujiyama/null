@@ -30,7 +30,7 @@ func (b *Byte) Scan(value interface{}) error {
 		b.Byte = data
 		return nil
 	default:
-		return fmt.Errorf("got data of type %T", value)
+		return fmt.Errorf("unsupported type: %T", value)
 	}
 }
 

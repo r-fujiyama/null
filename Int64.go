@@ -55,7 +55,7 @@ func (i *Int64) Scan(value interface{}) error {
 		i.Int64 = data
 		return nil
 	default:
-		return fmt.Errorf("got data of type %T", value)
+		return fmt.Errorf("unsupported type: %T", value)
 	}
 }
 

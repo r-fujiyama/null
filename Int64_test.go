@@ -122,8 +122,8 @@ func TestInt64ScanStringByteError(t *testing.T) {
 func TestInt64ScanTypeError(t *testing.T) {
 	val := Int64{}
 	err := val.Scan(struct{}{})
-	if err == nil || err.Error() != "got data of type struct {}" {
-		t.Fatalf("want %v, but %v:", "got data of type struct {}", err)
+	if err == nil || err.Error() != "unsupported type: struct {}" {
+		t.Fatalf("want %v, but %v:", "unsupported type: struct {}", err)
 	}
 }
 
