@@ -64,7 +64,7 @@ func (i Int) Value() (driver.Value, error) {
 	if !i.Valid {
 		return nil, nil
 	}
-	return i.Int, nil
+	return int64(i.Int), nil
 }
 
 // MarshalJSON encode the value to JSON.

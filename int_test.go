@@ -130,7 +130,7 @@ func TestIntScanTypeError(t *testing.T) {
 func TestIntValueInt(t *testing.T) {
 	val := Int{Int: 1, Valid: true}
 	got, err := val.Value()
-	if got != 1 || err != nil {
+	if got != int64(1) || err != nil {
 		t.Fatalf("want %v, but %v:", "1", got)
 	}
 }
@@ -138,7 +138,7 @@ func TestIntValueInt(t *testing.T) {
 func TestIntValueZero(t *testing.T) {
 	val := Int{Int: 0, Valid: true}
 	got, err := val.Value()
-	if got != 0 || err != nil {
+	if got != int64(0) || err != nil {
 		t.Fatalf("want %v, but %v:", 0, got)
 	}
 }
