@@ -127,19 +127,3 @@ func TestTimeUnmarshalJSONError(t *testing.T) {
 		t.Fatal("no error message is output")
 	}
 }
-
-func TestTimeString(t *testing.T) {
-	val := Time{Time: testTime, Valid: true}
-	want := "2022-12-31 23:59:59 +0000 UTC"
-	got := val.String()
-	if got != want {
-		t.Fatalf("want %v, but %v:", want, got)
-	}
-
-	val = Time{Time: time.Time{}, Valid: false}
-	want = "<null>"
-	got = val.String()
-	if got != want {
-		t.Fatalf("want %v, but %v:", want, got)
-	}
-}

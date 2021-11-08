@@ -65,11 +65,3 @@ func (t *Time) UnmarshalJSON(data []byte) error {
 	}
 	return nil
 }
-
-// String return string indicated the value.
-func (t Time) String() string {
-	if !t.Valid {
-		return "<null>"
-	}
-	return t.Time.String()
-}

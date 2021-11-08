@@ -260,19 +260,3 @@ func TestIntisZeroOrNullNull(t *testing.T) {
 		t.Fatal("it has to be zero or null")
 	}
 }
-
-func TestIntString(t *testing.T) {
-	val := Int{Int: 1, Valid: true}
-	want := "1"
-	got := val.String()
-	if got != want {
-		t.Fatalf("want %v, but %v:", want, got)
-	}
-
-	val = Int{Int: 0, Valid: false}
-	want = "<null>"
-	got = val.String()
-	if got != want {
-		t.Fatalf("want %v, but %v:", want, got)
-	}
-}

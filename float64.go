@@ -97,11 +97,3 @@ func (f *Float64) UnmarshalJSON(data []byte) error {
 func (f *Float64) IsZeroOrNull() bool {
 	return f.Float64 == 0 || !f.Valid
 }
-
-// String return string indicated the value.
-func (f Float64) String() string {
-	if !f.Valid {
-		return "<null>"
-	}
-	return strconv.FormatFloat(f.Float64, 'f', -1, 64)
-}
