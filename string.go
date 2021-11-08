@@ -39,7 +39,7 @@ func (s *String) Scan(value interface{}) error {
 }
 
 // Value implements the driver Valuer interface.
-func (s *String) Value() (driver.Value, error) {
+func (s String) Value() (driver.Value, error) {
 	if !s.Valid {
 		return nil, nil
 	}
