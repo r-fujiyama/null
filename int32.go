@@ -14,11 +14,6 @@ type Int32 struct {
 	Valid bool
 }
 
-// NewInt32 creates an instance of Int32.
-func NewInt32(i32 int32, valid bool) Int32 {
-	return Int32{Int32: i32, Valid: valid}
-}
-
 // Scan implements the Scanner interface.
 func (i *Int32) Scan(value interface{}) error {
 	if value == nil {

@@ -7,14 +7,6 @@ import (
 	"testing"
 )
 
-func TestInt32NewInt32(t *testing.T) {
-	val := NewInt32(1, true)
-	want := Int32{Int32: 1, Valid: true}
-	if val != want {
-		t.Fatalf("want %v, but %v:", want, val)
-	}
-}
-
 func TestInt32ScanNull(t *testing.T) {
 	val := Int32{}
 	if err := val.Scan(nil); err != nil {

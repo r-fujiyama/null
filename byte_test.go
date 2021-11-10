@@ -7,14 +7,6 @@ import (
 	"testing"
 )
 
-func TestByteNewByte(t *testing.T) {
-	val := NewByte(byte(97), true)
-	want := Byte{Byte: byte(97), Valid: true}
-	if val != want {
-		t.Fatalf("want %v, but %v:", want, val)
-	}
-}
-
 func TestByteScanNull(t *testing.T) {
 	val := Byte{}
 	if err := val.Scan(nil); err != nil {

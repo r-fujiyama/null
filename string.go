@@ -13,11 +13,6 @@ type String struct {
 	Valid bool
 }
 
-// NewString creates an instance of String.
-func NewString(str string, valid bool) String {
-	return String{Str: str, Valid: valid}
-}
-
 // Scan implements the Scanner interface.
 func (s *String) Scan(value interface{}) error {
 	if value == nil {

@@ -7,14 +7,6 @@ import (
 	"testing"
 )
 
-func TestStringNewString(t *testing.T) {
-	val := NewString("foo", true)
-	want := String{Str: "foo", Valid: true}
-	if val != want {
-		t.Fatalf("want %v, but %v:", want, val)
-	}
-}
-
 func TestStringScanNull(t *testing.T) {
 	val := String{}
 	if err := val.Scan(nil); err != nil {

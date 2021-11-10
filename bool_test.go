@@ -7,14 +7,6 @@ import (
 	"testing"
 )
 
-func TestBoolNewBool(t *testing.T) {
-	val := NewBool(true, true)
-	want := Bool{Bool: true, Valid: true}
-	if val != want {
-		t.Fatalf("want %v, but %v:", want, val)
-	}
-}
-
 func TestBoolScanNull(t *testing.T) {
 	val := Bool{}
 	if err := val.Scan(nil); err != nil {

@@ -14,11 +14,6 @@ type Int16 struct {
 	Valid bool
 }
 
-// NewInt16 creates an instance of Int16.
-func NewInt16(i16 int16, valid bool) Int16 {
-	return Int16{Int16: i16, Valid: valid}
-}
-
 // Scan implements the Scanner interface.
 func (i *Int16) Scan(value interface{}) error {
 	if value == nil {

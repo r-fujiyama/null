@@ -10,14 +10,6 @@ import (
 
 var testTime time.Time = time.Date(2022, 12, 31, 23, 59, 59, 0, time.UTC)
 
-func TestTimeNewTime(t *testing.T) {
-	val := NewTime(testTime, true)
-	want := Time{Time: testTime, Valid: true}
-	if val != want {
-		t.Fatalf("want %v, but %v:", want, val)
-	}
-}
-
 func TestTimeScanNull(t *testing.T) {
 	val := Time{}
 	if err := val.Scan(nil); err != nil {

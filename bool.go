@@ -14,11 +14,6 @@ type Bool struct {
 	Valid bool
 }
 
-// NewBool creates an instance of Bool.
-func NewBool(b bool, valid bool) Bool {
-	return Bool{Bool: b, Valid: valid}
-}
-
 // Scan implements the Scanner interface.
 func (b *Bool) Scan(value interface{}) error {
 	if value == nil {

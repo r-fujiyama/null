@@ -7,14 +7,6 @@ import (
 	"testing"
 )
 
-func TestIntNewInt(t *testing.T) {
-	val := NewInt(1, true)
-	want := Int{Int: 1, Valid: true}
-	if val != want {
-		t.Fatalf("want %v, but %v:", want, val)
-	}
-}
-
 func TestIntScanNull(t *testing.T) {
 	val := Int{}
 	if err := val.Scan(nil); err != nil {

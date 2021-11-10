@@ -7,14 +7,6 @@ import (
 	"testing"
 )
 
-func TestFloat64NewFloat64(t *testing.T) {
-	val := NewFloat64(1.1, true)
-	want := Float64{Float64: 1.1, Valid: true}
-	if val != want {
-		t.Fatalf("want %v, but %v:", want, val)
-	}
-}
-
 func TestFloat64ScanNull(t *testing.T) {
 	val := Float64{}
 	if err := val.Scan(nil); err != nil {

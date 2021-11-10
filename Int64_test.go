@@ -7,14 +7,6 @@ import (
 	"testing"
 )
 
-func TestInt64NewInt64(t *testing.T) {
-	val := NewInt64(1, true)
-	want := Int64{Int64: 1, Valid: true}
-	if val != want {
-		t.Fatalf("want %v, but %v:", want, val)
-	}
-}
-
 func TestInt64ScanNull(t *testing.T) {
 	val := Int64{}
 	if err := val.Scan(nil); err != nil {
