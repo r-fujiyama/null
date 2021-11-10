@@ -234,3 +234,19 @@ func TestInt16isZeroOrNullNull(t *testing.T) {
 		t.Fatal("it has to be zero or null")
 	}
 }
+
+func TestInt16String(t *testing.T) {
+	val := Int16{Int16: 1, Valid: true}
+	want := "1"
+	got := val.String()
+	if got != want {
+		t.Fatalf("want %v, but %v:", want, got)
+	}
+
+	val = Int16{Int16: 0, Valid: false}
+	want = "<null>"
+	got = val.String()
+	if got != want {
+		t.Fatalf("want %v, but %v:", want, got)
+	}
+}
