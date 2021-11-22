@@ -45,7 +45,7 @@ func (s String) MarshalJSON() ([]byte, error) {
 	if !s.Valid {
 		return []byte("null"), nil
 	}
-	return json.Marshal(s.Str)
+	return JSONMarshal(s.Str)
 }
 
 // UnmarshalJSON decode data to the value.

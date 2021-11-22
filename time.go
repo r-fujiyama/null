@@ -43,7 +43,7 @@ func (t Time) MarshalJSON() ([]byte, error) {
 	if !t.Valid {
 		return []byte("null"), nil
 	}
-	return json.Marshal(t.Time)
+	return JSONMarshal(t.Time)
 }
 
 // UnmarshalJSON decode data to the value.
