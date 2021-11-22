@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"strconv"
-	"unsafe"
 )
 
 // Int represents a int that may be null.
@@ -31,7 +30,7 @@ func (i *Int) Scan(value interface{}) error {
 		i.Int = integer
 		return nil
 	case []byte:
-		integer, err := strconv.Atoi(*(*string)(unsafe.Pointer(&data)))
+		integer, err := strconv.Atoi(string(data))
 		if err != nil {
 			return err
 		}

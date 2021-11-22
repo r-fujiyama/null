@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"strconv"
-	"unsafe"
 )
 
 // Int64 represents a int64 that may be null.
@@ -31,7 +30,7 @@ func (i *Int64) Scan(value interface{}) error {
 		i.Int64 = i64
 		return nil
 	case []byte:
-		i64, err := strconv.ParseInt(*(*string)(unsafe.Pointer(&data)), 10, 64)
+		i64, err := strconv.ParseInt(string(data), 10, 64)
 		if err != nil {
 			return err
 		}

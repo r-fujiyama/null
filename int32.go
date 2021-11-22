@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"strconv"
-	"unsafe"
 )
 
 // Int32 represents a int32 that may be null.
@@ -31,7 +30,7 @@ func (i *Int32) Scan(value interface{}) error {
 		i.Int32 = int32(i32)
 		return nil
 	case []byte:
-		i32, err := strconv.ParseInt(*(*string)(unsafe.Pointer(&data)), 10, 32)
+		i32, err := strconv.ParseInt(string(data), 10, 32)
 		if err != nil {
 			return err
 		}

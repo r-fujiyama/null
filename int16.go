@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"strconv"
-	"unsafe"
 )
 
 // Int16 represents a int16 that may be null.
@@ -31,7 +30,7 @@ func (i *Int16) Scan(value interface{}) error {
 		i.Int16 = int16(i16)
 		return nil
 	case []byte:
-		i16, err := strconv.ParseInt(*(*string)(unsafe.Pointer(&data)), 10, 16)
+		i16, err := strconv.ParseInt(string(data), 10, 16)
 		if err != nil {
 			return err
 		}

@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"strconv"
-	"unsafe"
 )
 
 // Float64 represents a float64 that may be null.
@@ -31,7 +30,7 @@ func (f *Float64) Scan(value interface{}) error {
 		f.Float64 = f64
 		return nil
 	case []byte:
-		f64, err := strconv.ParseFloat(*(*string)(unsafe.Pointer(&data)), 64)
+		f64, err := strconv.ParseFloat(string(data), 64)
 		if err != nil {
 			return err
 		}

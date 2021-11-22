@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"strconv"
-	"unsafe"
 )
 
 // Bool represents a bool that may be null.
@@ -31,7 +30,7 @@ func (b *Bool) Scan(value interface{}) error {
 		b.Bool = toBool
 		return nil
 	case []byte:
-		toBool, err := strconv.ParseBool(*(*string)(unsafe.Pointer(&data)))
+		toBool, err := strconv.ParseBool(string(data))
 		if err != nil {
 			return err
 		}

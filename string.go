@@ -4,7 +4,6 @@ import (
 	"database/sql/driver"
 	"encoding/json"
 	"fmt"
-	"unsafe"
 )
 
 // String represents a string that may be null.
@@ -26,7 +25,7 @@ func (s *String) Scan(value interface{}) error {
 		s.Str = data
 		return nil
 	case []byte:
-		s.Str = *(*string)(unsafe.Pointer(&data))
+		s.Str = string(data)
 		return nil
 	default:
 		return fmt.Errorf("unsupported type: %T", value)
