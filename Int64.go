@@ -13,6 +13,11 @@ type Int64 struct {
 	Valid bool
 }
 
+// NewInt64 creates a new Int64
+func NewInt64(i64 int64, valid bool) Int64 {
+	return Int64{Int64: i64, Valid: valid}
+}
+
 // Scan implements the Scanner interface.
 func (i *Int64) Scan(value interface{}) error {
 	if value == nil {

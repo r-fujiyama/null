@@ -16,7 +16,7 @@ func TestTimeScanNull(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Time{Time: time.Time{}, Valid: false}
+	want := NewTime(time.Time{}, false)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -28,7 +28,7 @@ func TestTimeScanTime(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Time{Time: testTime, Valid: true}
+	want := NewTime(testTime, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -43,7 +43,7 @@ func TestTimeScanTypeError(t *testing.T) {
 }
 
 func TestTimeValueTime(t *testing.T) {
-	val := Time{Time: testTime, Valid: true}
+	val := NewTime(testTime, true)
 	got, err := val.Value()
 	if got != testTime || err != nil {
 		t.Fatalf("want %v, but %v:", true, got)
@@ -51,7 +51,7 @@ func TestTimeValueTime(t *testing.T) {
 }
 
 func TestTimeValueNull(t *testing.T) {
-	val := Time{Time: time.Time{}, Valid: false}
+	val := NewTime(time.Time{}, false)
 	got, err := val.Value()
 	if got != nil || err != nil {
 		t.Fatalf("want %v, but %v:", "", got)
@@ -59,7 +59,7 @@ func TestTimeValueNull(t *testing.T) {
 }
 
 func TestTimeMarshalJSONTime(t *testing.T) {
-	val := Time{Time: testTime, Valid: true}
+	val := NewTime(testTime, true)
 	var buf bytes.Buffer
 	if err := json.NewEncoder(&buf).Encode(val); err != nil {
 		t.Fatal(err)
@@ -73,7 +73,7 @@ func TestTimeMarshalJSONTime(t *testing.T) {
 }
 
 func TestTimeMarshalJSONNull(t *testing.T) {
-	val := Time{Time: time.Time{}, Valid: false}
+	val := NewTime(time.Time{}, false)
 	var buf bytes.Buffer
 	if err := json.NewEncoder(&buf).Encode(val); err != nil {
 		t.Fatal(err)
@@ -93,7 +93,7 @@ func TestTimeUnmarshalJSONTime(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Time{Time: testTime, Valid: true}
+	want := NewTime(testTime, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -106,7 +106,7 @@ func TestTimeUnmarshalJSONNull(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Time{Time: time.Time{}, Valid: false}
+	want := NewTime(time.Time{}, false)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -121,12 +121,12 @@ func TestTimeUnmarshalJSONError(t *testing.T) {
 }
 
 func TestTimeIsNull(t *testing.T) {
-	val := Time{Time: time.Time{}, Valid: true}
+	val := NewTime(time.Time{}, true)
 	if val.IsNull() {
 		t.Fatal("it has to be not null")
 	}
 
-	val = Time{Time: time.Time{}, Valid: false}
+	val = NewTime(time.Time{}, false)
 	if !val.IsNull() {
 		t.Fatal("it has to be not null")
 	}

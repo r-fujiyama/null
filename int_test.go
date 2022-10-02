@@ -13,7 +13,7 @@ func TestIntScanNull(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Int{Int: 0, Valid: false}
+	want := NewInt(0, false)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -25,7 +25,7 @@ func TestIntScanString(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Int{Int: 1, Valid: true}
+	want := NewInt(1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -37,7 +37,7 @@ func TestIntScanByte(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Int{Int: 1, Valid: true}
+	want := NewInt(1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -50,7 +50,7 @@ func TestIntScanInt(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Int{Int: 1, Valid: true}
+	want := NewInt(1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -63,7 +63,7 @@ func TestIntScanInt8(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Int{Int: 1, Valid: true}
+	want := NewInt(1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -76,7 +76,7 @@ func TestIntScanInt16(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Int{Int: 1, Valid: true}
+	want := NewInt(1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -89,7 +89,7 @@ func TestIntScanInt32(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Int{Int: 1, Valid: true}
+	want := NewInt(1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -102,7 +102,7 @@ func TestIntScanInt64(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Int{Int: 1, Valid: true}
+	want := NewInt(1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -133,7 +133,7 @@ func TestIntScanTypeError(t *testing.T) {
 }
 
 func TestIntValueInt(t *testing.T) {
-	val := Int{Int: 1, Valid: true}
+	val := NewInt(1, true)
 	got, err := val.Value()
 	if got != int64(1) || err != nil {
 		t.Fatalf("want %v, but %v:", "1", got)
@@ -141,7 +141,7 @@ func TestIntValueInt(t *testing.T) {
 }
 
 func TestIntValueZero(t *testing.T) {
-	val := Int{Int: 0, Valid: true}
+	val := NewInt(0, true)
 	got, err := val.Value()
 	if got != int64(0) || err != nil {
 		t.Fatalf("want %v, but %v:", 0, got)
@@ -149,7 +149,7 @@ func TestIntValueZero(t *testing.T) {
 }
 
 func TestIntValueNull(t *testing.T) {
-	val := Int{Int: 0, Valid: false}
+	val := NewInt(0, false)
 	got, err := val.Value()
 	if got != nil || err != nil {
 		t.Fatalf("want %v, but %v:", 0, got)
@@ -157,7 +157,7 @@ func TestIntValueNull(t *testing.T) {
 }
 
 func TestIntMarshalJSONInt(t *testing.T) {
-	val := Int{Int: 1, Valid: true}
+	val := NewInt(1, true)
 	var buf bytes.Buffer
 	if err := json.NewEncoder(&buf).Encode(val); err != nil {
 		t.Fatal(err)
@@ -171,7 +171,7 @@ func TestIntMarshalJSONInt(t *testing.T) {
 }
 
 func TestIntMarshalJSONZero(t *testing.T) {
-	val := Int{Int: 0, Valid: true}
+	val := NewInt(0, true)
 	var buf bytes.Buffer
 	if err := json.NewEncoder(&buf).Encode(val); err != nil {
 		t.Fatal(err)
@@ -185,7 +185,7 @@ func TestIntMarshalJSONZero(t *testing.T) {
 }
 
 func TestIntMarshalJSONNull(t *testing.T) {
-	val := Int{Int: 0, Valid: false}
+	val := NewInt(0, false)
 	var buf bytes.Buffer
 	if err := json.NewEncoder(&buf).Encode(val); err != nil {
 		t.Fatal(err)
@@ -205,7 +205,7 @@ func TestIntUnmarshalJSONInt(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Int{Int: 1, Valid: true}
+	want := NewInt(1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -218,7 +218,7 @@ func TestIntUnmarshalJSONZero(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Int{Int: 0, Valid: true}
+	want := NewInt(0, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -231,7 +231,7 @@ func TestIntUnmarshalJSONNull(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Int{Int: 0, Valid: false}
+	want := NewInt(0, false)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -246,12 +246,12 @@ func TestIntUnmarshalJSONError(t *testing.T) {
 }
 
 func TestIntIsNull(t *testing.T) {
-	val := Int{Int: 0, Valid: true}
+	val := NewInt(0, true)
 	if val.IsNull() {
 		t.Fatal("it has to be not null")
 	}
 
-	val = Int{Int: 0, Valid: false}
+	val = NewInt(0, false)
 	if !val.IsNull() {
 		t.Fatal("it has to be not null")
 	}

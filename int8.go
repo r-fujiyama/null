@@ -13,6 +13,11 @@ type Int8 struct {
 	Valid bool
 }
 
+// NewInt8 creates a new Int8
+func NewInt8(i8 int8, valid bool) Int8 {
+	return Int8{Int8: i8, Valid: valid}
+}
+
 // Scan implements the Scanner interface.
 func (i *Int8) Scan(value interface{}) error {
 	if value == nil {

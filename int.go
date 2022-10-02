@@ -13,6 +13,11 @@ type Int struct {
 	Valid bool
 }
 
+// NewInt creates a new Int
+func NewInt(i int, valid bool) Int {
+	return Int{Int: i, Valid: valid}
+}
+
 // Scan implements the Scanner interface.
 func (i *Int) Scan(value interface{}) error {
 	if value == nil {

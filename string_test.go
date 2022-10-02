@@ -13,7 +13,7 @@ func TestStringScanNull(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := String{String: "", Valid: false}
+	want := NewString("", false)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -25,7 +25,7 @@ func TestStringScanString(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := String{String: "foo", Valid: true}
+	want := NewString("foo", true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -37,7 +37,7 @@ func TestStringScanStringEmpty(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := String{String: "", Valid: true}
+	want := NewString("", true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -49,7 +49,7 @@ func TestStringScanByte(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := String{String: "foo", Valid: true}
+	want := NewString("foo", true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -61,7 +61,7 @@ func TestStringScanByteEmpty(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := String{String: "", Valid: true}
+	want := NewString("", true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -76,7 +76,7 @@ func TestStringScanError(t *testing.T) {
 }
 
 func TestStringValueString(t *testing.T) {
-	val := String{String: "foo", Valid: true}
+	val := NewString("foo", true)
 	got, err := val.Value()
 	if got != "foo" || err != nil {
 		t.Fatalf("want %v, but %v:", "foo", got)
@@ -84,7 +84,7 @@ func TestStringValueString(t *testing.T) {
 }
 
 func TestStringValueEmpty(t *testing.T) {
-	val := String{String: "", Valid: true}
+	val := NewString("", true)
 	got, err := val.Value()
 	if got != "" || err != nil {
 		t.Fatalf("want %v, but %v:", "", got)
@@ -92,7 +92,7 @@ func TestStringValueEmpty(t *testing.T) {
 }
 
 func TestStringValueNull(t *testing.T) {
-	val := String{String: "foo", Valid: false}
+	val := NewString("foo", false)
 	got, err := val.Value()
 	if got != nil || err != nil {
 		t.Fatalf("want %v, but %v:", "", got)
@@ -100,7 +100,7 @@ func TestStringValueNull(t *testing.T) {
 }
 
 func TestStringMarshalJSONString(t *testing.T) {
-	val := String{String: "foo", Valid: true}
+	val := NewString("foo", true)
 	var buf bytes.Buffer
 	if err := json.NewEncoder(&buf).Encode(val); err != nil {
 		t.Fatal(err)
@@ -114,7 +114,7 @@ func TestStringMarshalJSONString(t *testing.T) {
 }
 
 func TestStringMarshalJSONEmpty(t *testing.T) {
-	val := String{String: "", Valid: true}
+	val := NewString("", true)
 	var buf bytes.Buffer
 	if err := json.NewEncoder(&buf).Encode(val); err != nil {
 		t.Fatal(err)
@@ -128,7 +128,7 @@ func TestStringMarshalJSONEmpty(t *testing.T) {
 }
 
 func TestStringMarshalJSONNull(t *testing.T) {
-	val := String{String: "foo", Valid: false}
+	val := NewString("foo", false)
 	var buf bytes.Buffer
 	if err := json.NewEncoder(&buf).Encode(val); err != nil {
 		t.Fatal(err)
@@ -148,7 +148,7 @@ func TestStringUnmarshalJSONString(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := String{String: "foo", Valid: true}
+	want := NewString("foo", true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -161,7 +161,7 @@ func TestStringUnmarshalJSONEmpty(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := String{String: "", Valid: true}
+	want := NewString("", true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -174,7 +174,7 @@ func TestStringUnmarshalJSONNull(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := String{String: "", Valid: false}
+	want := NewString("", false)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -189,33 +189,33 @@ func TestStringUnmarshalJSONError(t *testing.T) {
 }
 
 func TestStringIsEmptyString(t *testing.T) {
-	val := String{String: "foo", Valid: true}
+	val := NewString("foo", true)
 	if val.IsEmpty() {
 		t.Fatal("should not be empty")
 	}
 }
 
 func TestStringIsEmptyEmpty(t *testing.T) {
-	val := String{String: "", Valid: true}
+	val := NewString("", true)
 	if !val.IsEmpty() {
 		t.Fatal("it has to be empty")
 	}
 }
 
 func TestStringIsEmptyNull(t *testing.T) {
-	val := String{String: "", Valid: false}
+	val := NewString("", false)
 	if !val.IsEmpty() {
 		t.Fatal("it has to be empty")
 	}
 }
 
 func TestStringIsNull(t *testing.T) {
-	val := String{String: "", Valid: true}
+	val := NewString("", true)
 	if val.IsNull() {
 		t.Fatal("it has to be not null")
 	}
 
-	val = String{String: "", Valid: false}
+	val = NewString("", false)
 	if !val.IsNull() {
 		t.Fatal("it has to be not null")
 	}

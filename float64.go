@@ -13,6 +13,11 @@ type Float64 struct {
 	Valid   bool
 }
 
+// NewFloat64 creates a new Float64
+func NewFloat64(f64 float64, valid bool) Float64 {
+	return Float64{Float64: f64, Valid: valid}
+}
+
 // Scan implements the Scanner interface.
 func (f *Float64) Scan(value interface{}) error {
 	if value == nil {

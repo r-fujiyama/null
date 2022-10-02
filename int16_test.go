@@ -13,7 +13,7 @@ func TestInt16ScanNull(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Int16{Int16: 0, Valid: false}
+	want := NewInt16(0, false)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -25,7 +25,7 @@ func TestInt16ScanString(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Int16{Int16: 1, Valid: true}
+	want := NewInt16(1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -37,7 +37,7 @@ func TestInt16ScanByte(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Int16{Int16: 1, Valid: true}
+	want := NewInt16(1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -50,7 +50,7 @@ func TestInt16ScanInt(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Int16{Int16: 1, Valid: true}
+	want := NewInt16(1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -63,7 +63,7 @@ func TestInt16ScanInt8(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Int16{Int16: 1, Valid: true}
+	want := NewInt16(1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -76,7 +76,7 @@ func TestInt16ScanInt16(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Int16{Int16: 1, Valid: true}
+	want := NewInt16(1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -107,7 +107,7 @@ func TestInt16ScanTypeError(t *testing.T) {
 }
 
 func TestInt16ValueInt(t *testing.T) {
-	val := Int16{Int16: 1, Valid: true}
+	val := NewInt16(1, true)
 	got, err := val.Value()
 	if got != int64(1) || err != nil {
 		t.Fatalf("want %v, but %v:", "1", got)
@@ -115,7 +115,7 @@ func TestInt16ValueInt(t *testing.T) {
 }
 
 func TestInt16ValueZero(t *testing.T) {
-	val := Int16{Int16: 0, Valid: true}
+	val := NewInt16(0, true)
 	got, err := val.Value()
 	if got != int64(0) || err != nil {
 		t.Fatalf("want %v, but %v:", 0, got)
@@ -123,7 +123,7 @@ func TestInt16ValueZero(t *testing.T) {
 }
 
 func TestInt16ValueNull(t *testing.T) {
-	val := Int16{Int16: 0, Valid: false}
+	val := NewInt16(0, false)
 	got, err := val.Value()
 	if got != nil || err != nil {
 		t.Fatalf("want %v, but %v:", 0, got)
@@ -131,7 +131,7 @@ func TestInt16ValueNull(t *testing.T) {
 }
 
 func TestInt16MarshalJSONInt(t *testing.T) {
-	val := Int16{Int16: 1, Valid: true}
+	val := NewInt16(1, true)
 	var buf bytes.Buffer
 	if err := json.NewEncoder(&buf).Encode(val); err != nil {
 		t.Fatal(err)
@@ -145,7 +145,7 @@ func TestInt16MarshalJSONInt(t *testing.T) {
 }
 
 func TestInt16MarshalJSONZero(t *testing.T) {
-	val := Int16{Int16: 0, Valid: true}
+	val := NewInt16(0, true)
 	var buf bytes.Buffer
 	if err := json.NewEncoder(&buf).Encode(val); err != nil {
 		t.Fatal(err)
@@ -159,7 +159,7 @@ func TestInt16MarshalJSONZero(t *testing.T) {
 }
 
 func TestInt16MarshalJSONNull(t *testing.T) {
-	val := Int16{Int16: 0, Valid: false}
+	val := NewInt16(0, false)
 	var buf bytes.Buffer
 	if err := json.NewEncoder(&buf).Encode(val); err != nil {
 		t.Fatal(err)
@@ -179,7 +179,7 @@ func TestInt16UnmarshalJSONInt(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Int16{Int16: 1, Valid: true}
+	want := NewInt16(1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -192,7 +192,7 @@ func TestInt16UnmarshalJSONZero(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Int16{Int16: 0, Valid: true}
+	want := NewInt16(0, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -205,7 +205,7 @@ func TestInt16UnmarshalJSONNull(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Int16{Int16: 0, Valid: false}
+	want := NewInt16(0, false)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -220,12 +220,12 @@ func TestInt16UnmarshalJSONError(t *testing.T) {
 }
 
 func TestInt16IsNull(t *testing.T) {
-	val := Int16{Int16: 0, Valid: true}
+	val := NewInt16(0, true)
 	if val.IsNull() {
 		t.Fatal("it has to be not null")
 	}
 
-	val = Int16{Int16: 0, Valid: false}
+	val = NewInt16(0, false)
 	if !val.IsNull() {
 		t.Fatal("it has to be not null")
 	}

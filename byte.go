@@ -12,6 +12,11 @@ type Byte struct {
 	Valid bool
 }
 
+// NewByte creates a new Byte
+func NewByte(b byte, valid bool) Byte {
+	return Byte{Byte: b, Valid: valid}
+}
+
 // Scan implements the Scanner interface.
 func (b *Byte) Scan(value interface{}) error {
 	if value == nil {

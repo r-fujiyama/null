@@ -13,7 +13,7 @@ func TestFloat64ScanNull(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Float64{Float64: 0, Valid: false}
+	want := NewFloat64(0, false)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -25,7 +25,7 @@ func TestFloat64ScanString(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Float64{Float64: 1.1, Valid: true}
+	want := NewFloat64(1.1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -37,7 +37,7 @@ func TestFloat64ScanByte(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Float64{Float64: 1.1, Valid: true}
+	want := NewFloat64(1.1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -50,7 +50,7 @@ func TestFloat64ScanInt(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Float64{Float64: 1, Valid: true}
+	want := NewFloat64(1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -63,7 +63,7 @@ func TestFloat64ScanInt8(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Float64{Float64: 1, Valid: true}
+	want := NewFloat64(1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -76,7 +76,7 @@ func TestFloat64ScanInt16(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Float64{Float64: 1, Valid: true}
+	want := NewFloat64(1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -89,7 +89,7 @@ func TestFloat64ScanInt32(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Float64{Float64: 1, Valid: true}
+	want := NewFloat64(1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -102,7 +102,7 @@ func TestFloat64ScanInt64(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Float64{Float64: 1, Valid: true}
+	want := NewFloat64(1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -115,7 +115,7 @@ func TestFloat64ScanFloat64(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Float64{Float64: 1.1, Valid: true}
+	want := NewFloat64(1.1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -146,7 +146,7 @@ func TestFloat64ScanTypeError(t *testing.T) {
 }
 
 func TestFloat64ValueFloat(t *testing.T) {
-	val := Float64{Float64: 1.1, Valid: true}
+	val := NewFloat64(1.1, true)
 	got, err := val.Value()
 	if got != 1.1 || err != nil {
 		t.Fatalf("want %v, but %v:", 1.1, got)
@@ -154,7 +154,7 @@ func TestFloat64ValueFloat(t *testing.T) {
 }
 
 func TestFloat64ValueZero(t *testing.T) {
-	val := Float64{Float64: 0, Valid: true}
+	val := NewFloat64(0, true)
 	got, err := val.Value()
 	if got != 0.0 || err != nil {
 		t.Fatalf("want %v, but %v:", 0.0, got)
@@ -162,7 +162,7 @@ func TestFloat64ValueZero(t *testing.T) {
 }
 
 func TestFloat64ValueNull(t *testing.T) {
-	val := Float64{Float64: 0, Valid: false}
+	val := NewFloat64(0, false)
 	got, err := val.Value()
 	if got != nil || err != nil {
 		t.Fatalf("want %v, but %v:", 0.0, got)
@@ -170,7 +170,7 @@ func TestFloat64ValueNull(t *testing.T) {
 }
 
 func TestFloat64MarshalJSONFloat(t *testing.T) {
-	val := Float64{Float64: 1.1, Valid: true}
+	val := NewFloat64(1.1, true)
 	var buf bytes.Buffer
 	if err := json.NewEncoder(&buf).Encode(val); err != nil {
 		t.Fatal(err)
@@ -184,7 +184,7 @@ func TestFloat64MarshalJSONFloat(t *testing.T) {
 }
 
 func TestFloat64MarshalJSONZero(t *testing.T) {
-	val := Float64{Float64: 0, Valid: true}
+	val := NewFloat64(0, true)
 	var buf bytes.Buffer
 	if err := json.NewEncoder(&buf).Encode(val); err != nil {
 		t.Fatal(err)
@@ -198,7 +198,7 @@ func TestFloat64MarshalJSONZero(t *testing.T) {
 }
 
 func TestFloat64MarshalJSONNull(t *testing.T) {
-	val := Float64{Float64: 0, Valid: false}
+	val := NewFloat64(0, false)
 	var buf bytes.Buffer
 	if err := json.NewEncoder(&buf).Encode(val); err != nil {
 		t.Fatal(err)
@@ -218,7 +218,7 @@ func TestFloat64UnmarshalJSONFloat(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Float64{Float64: 1.1, Valid: true}
+	want := NewFloat64(1.1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -231,7 +231,7 @@ func TestFloat64UnmarshalJSONZero(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Float64{Float64: 0, Valid: true}
+	want := NewFloat64(0, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -244,7 +244,7 @@ func TestFloat64UnmarshalJSONNull(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Float64{Float64: 0, Valid: false}
+	want := NewFloat64(0, false)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -259,12 +259,12 @@ func TestFloat64UnmarshalJSONError(t *testing.T) {
 }
 
 func TestFloat64IsNull(t *testing.T) {
-	val := Float64{Float64: 0, Valid: true}
+	val := NewFloat64(0, true)
 	if val.IsNull() {
 		t.Fatal("it has to be not null")
 	}
 
-	val = Float64{Float64: 0, Valid: false}
+	val = NewFloat64(0, false)
 	if !val.IsNull() {
 		t.Fatal("it has to be not null")
 	}

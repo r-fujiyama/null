@@ -13,6 +13,11 @@ type Float32 struct {
 	Valid   bool
 }
 
+// NewFloat32 creates a new Float32
+func NewFloat32(f32 float32, valid bool) Float32 {
+	return Float32{Float32: f32, Valid: valid}
+}
+
 // Scan implements the Scanner interface.
 func (f *Float32) Scan(value interface{}) error {
 	if value == nil {

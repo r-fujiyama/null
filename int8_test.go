@@ -13,7 +13,7 @@ func TestInt8ScanNull(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Int8{Int8: 0, Valid: false}
+	want := NewInt8(0, false)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -25,7 +25,7 @@ func TestInt8ScanString(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Int8{Int8: 1, Valid: true}
+	want := NewInt8(1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -37,7 +37,7 @@ func TestInt8ScanByte(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Int8{Int8: 1, Valid: true}
+	want := NewInt8(1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -50,7 +50,7 @@ func TestInt8ScanInt(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Int8{Int8: 1, Valid: true}
+	want := NewInt8(1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -63,7 +63,7 @@ func TestInt8ScanInt8(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Int8{Int8: 1, Valid: true}
+	want := NewInt8(1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -94,7 +94,7 @@ func TestInt8ScanTypeError(t *testing.T) {
 }
 
 func TestInt8ValueInt(t *testing.T) {
-	val := Int8{Int8: 1, Valid: true}
+	val := NewInt8(1, true)
 	got, err := val.Value()
 	if got != int64(1) || err != nil {
 		t.Fatalf("want %v, but %v:", "1", got)
@@ -102,7 +102,7 @@ func TestInt8ValueInt(t *testing.T) {
 }
 
 func TestInt8ValueZero(t *testing.T) {
-	val := Int8{Int8: 0, Valid: true}
+	val := NewInt8(0, true)
 	got, err := val.Value()
 	if got != int64(0) || err != nil {
 		t.Fatalf("want %v, but %v:", 0, got)
@@ -110,7 +110,7 @@ func TestInt8ValueZero(t *testing.T) {
 }
 
 func TestInt8ValueNull(t *testing.T) {
-	val := Int8{Int8: 0, Valid: false}
+	val := NewInt8(0, false)
 	got, err := val.Value()
 	if got != nil || err != nil {
 		t.Fatalf("want %v, but %v:", 0, got)
@@ -118,7 +118,7 @@ func TestInt8ValueNull(t *testing.T) {
 }
 
 func TestInt8MarshalJSONInt(t *testing.T) {
-	val := Int8{Int8: 1, Valid: true}
+	val := NewInt8(1, true)
 	var buf bytes.Buffer
 	if err := json.NewEncoder(&buf).Encode(val); err != nil {
 		t.Fatal(err)
@@ -132,7 +132,7 @@ func TestInt8MarshalJSONInt(t *testing.T) {
 }
 
 func TestInt8MarshalJSONZero(t *testing.T) {
-	val := Int8{Int8: 0, Valid: true}
+	val := NewInt8(0, true)
 	var buf bytes.Buffer
 	if err := json.NewEncoder(&buf).Encode(val); err != nil {
 		t.Fatal(err)
@@ -146,7 +146,7 @@ func TestInt8MarshalJSONZero(t *testing.T) {
 }
 
 func TestInt8MarshalJSONNull(t *testing.T) {
-	val := Int8{Int8: 0, Valid: false}
+	val := NewInt8(0, false)
 	var buf bytes.Buffer
 	if err := json.NewEncoder(&buf).Encode(val); err != nil {
 		t.Fatal(err)
@@ -166,7 +166,7 @@ func TestInt8UnmarshalJSONInt(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Int8{Int8: 1, Valid: true}
+	want := NewInt8(1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -179,7 +179,7 @@ func TestInt8UnmarshalJSONZero(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Int8{Int8: 0, Valid: true}
+	want := NewInt8(0, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -192,7 +192,7 @@ func TestInt8UnmarshalJSONNull(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Int8{Int8: 0, Valid: false}
+	want := NewInt8(0, false)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -207,12 +207,12 @@ func TestInt8UnmarshalJSONError(t *testing.T) {
 }
 
 func TestInt8IsNull(t *testing.T) {
-	val := Int8{Int8: 0, Valid: true}
+	val := NewInt8(0, true)
 	if val.IsNull() {
 		t.Fatal("it has to be not null")
 	}
 
-	val = Int8{Int8: 0, Valid: false}
+	val = NewInt8(0, false)
 	if !val.IsNull() {
 		t.Fatal("it has to be not null")
 	}

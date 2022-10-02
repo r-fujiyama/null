@@ -13,6 +13,11 @@ type Time struct {
 	Valid bool
 }
 
+// NewTime creates a new Time
+func NewTime(t time.Time, valid bool) Time {
+	return Time{Time: t, Valid: valid}
+}
+
 // Scan implements the Scanner interface.
 func (t *Time) Scan(value interface{}) error {
 	if value == nil {

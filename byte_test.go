@@ -13,7 +13,7 @@ func TestByteScanNull(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Byte{Byte: byte(0), Valid: false}
+	want := NewByte(byte(0), false)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -25,7 +25,7 @@ func TestByteScanByte(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Byte{Byte: byte(97), Valid: true}
+	want := NewByte(byte(97), true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -40,7 +40,7 @@ func TestByteScanError(t *testing.T) {
 }
 
 func TestByteValueByte(t *testing.T) {
-	val := Byte{Byte: byte(97), Valid: true}
+	val := NewByte(byte(97), true)
 	got, err := val.Value()
 	if got != byte(97) || err != nil {
 		t.Fatalf("want %v, but %v:", byte(97), got)
@@ -48,7 +48,7 @@ func TestByteValueByte(t *testing.T) {
 }
 
 func TestByteValueNull(t *testing.T) {
-	val := Byte{Byte: byte(0), Valid: false}
+	val := NewByte(byte(0), false)
 	got, err := val.Value()
 	if got != nil || err != nil {
 		t.Fatalf("want %v, but %v:", "", got)
@@ -56,7 +56,7 @@ func TestByteValueNull(t *testing.T) {
 }
 
 func TestByteMarshalJSONByte(t *testing.T) {
-	val := Byte{Byte: byte(97), Valid: true}
+	val := NewByte(byte(97), true)
 	var buf bytes.Buffer
 	if err := json.NewEncoder(&buf).Encode(val); err != nil {
 		t.Fatal(err)
@@ -70,7 +70,7 @@ func TestByteMarshalJSONByte(t *testing.T) {
 }
 
 func TestByteMarshalJSONNull(t *testing.T) {
-	val := Byte{Byte: byte(0), Valid: false}
+	val := NewByte(byte(0), false)
 	var buf bytes.Buffer
 	if err := json.NewEncoder(&buf).Encode(val); err != nil {
 		t.Fatal(err)
@@ -90,7 +90,7 @@ func TestByteUnmarshalJSONByte(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Byte{Byte: byte(97), Valid: true}
+	want := NewByte(byte(97), true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -103,7 +103,7 @@ func TestByteUnmarshalJSONNull(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Byte{Byte: byte(0), Valid: false}
+	want := NewByte(byte(0), false)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -118,12 +118,12 @@ func TestByteUnmarshalJSONError(t *testing.T) {
 }
 
 func TestByteIsNull(t *testing.T) {
-	val := Byte{Byte: byte(97), Valid: true}
+	val := NewByte(byte(97), true)
 	if val.IsNull() {
 		t.Fatal("it has to be not null")
 	}
 
-	val = Byte{Byte: byte(0), Valid: false}
+	val = NewByte(byte(0), false)
 	if !val.IsNull() {
 		t.Fatal("it has to be not null")
 	}

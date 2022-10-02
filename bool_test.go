@@ -13,7 +13,7 @@ func TestBoolScanNull(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Bool{Bool: false, Valid: false}
+	want := NewBool(false, false)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -25,7 +25,7 @@ func TestBoolScanString(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Bool{Bool: true, Valid: true}
+	want := NewBool(true, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -37,7 +37,7 @@ func TestBoolScanByte(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Bool{Bool: true, Valid: true}
+	want := NewBool(true, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -49,7 +49,7 @@ func TestBoolScanInt(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Bool{Bool: true, Valid: true}
+	want := NewBool(true, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -61,7 +61,7 @@ func TestBoolScanUint8(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Bool{Bool: true, Valid: true}
+	want := NewBool(true, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -73,7 +73,7 @@ func TestBoolScanUint16(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Bool{Bool: true, Valid: true}
+	want := NewBool(true, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -85,7 +85,7 @@ func TestBoolScanUint32(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Bool{Bool: true, Valid: true}
+	want := NewBool(true, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -96,7 +96,7 @@ func TestBoolScanUint64(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Bool{Bool: true, Valid: true}
+	want := NewBool(true, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -108,7 +108,7 @@ func TestBoolScanInt8(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Bool{Bool: true, Valid: true}
+	want := NewBool(true, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -120,7 +120,7 @@ func TestBoolScanInt16(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Bool{Bool: true, Valid: true}
+	want := NewBool(true, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -132,7 +132,7 @@ func TestBoolScanInt32(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Bool{Bool: true, Valid: true}
+	want := NewBool(true, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -143,7 +143,7 @@ func TestBoolScanInt64(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Bool{Bool: true, Valid: true}
+	want := NewBool(true, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -155,7 +155,7 @@ func TestBoolScanBool(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Bool{Bool: true, Valid: true}
+	want := NewBool(true, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -258,7 +258,7 @@ func TestBoolScanTypeError(t *testing.T) {
 }
 
 func TestBoolValueBool(t *testing.T) {
-	val := Bool{Bool: true, Valid: true}
+	val := NewBool(true, true)
 	got, err := val.Value()
 	if got != true || err != nil {
 		t.Fatalf("want %v, but %v:", true, got)
@@ -266,7 +266,7 @@ func TestBoolValueBool(t *testing.T) {
 }
 
 func TestBoolValueNull(t *testing.T) {
-	val := Bool{Bool: false, Valid: false}
+	val := NewBool(false, false)
 	got, err := val.Value()
 	if got != nil || err != nil {
 		t.Fatalf("want %v, but %v:", "", got)
@@ -274,7 +274,7 @@ func TestBoolValueNull(t *testing.T) {
 }
 
 func TestBoolMarshalJSONBool(t *testing.T) {
-	val := Bool{Bool: true, Valid: true}
+	val := NewBool(true, true)
 	var buf bytes.Buffer
 	if err := json.NewEncoder(&buf).Encode(val); err != nil {
 		t.Fatal(err)
@@ -288,7 +288,7 @@ func TestBoolMarshalJSONBool(t *testing.T) {
 }
 
 func TestBoolMarshalJSONNull(t *testing.T) {
-	val := Bool{Bool: false, Valid: false}
+	val := NewBool(false, false)
 	var buf bytes.Buffer
 	if err := json.NewEncoder(&buf).Encode(val); err != nil {
 		t.Fatal(err)
@@ -308,7 +308,7 @@ func TestBoolUnmarshalJSONBool(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Bool{Bool: true, Valid: true}
+	want := NewBool(true, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -321,7 +321,7 @@ func TestBoolUnmarshalJSONNull(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	want := Bool{Bool: false, Valid: false}
+	want := NewBool(false, false)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
 	}
@@ -336,12 +336,12 @@ func TestBoolUnmarshalJSONError(t *testing.T) {
 }
 
 func TestBoolIsNull(t *testing.T) {
-	val := Bool{Bool: true, Valid: true}
+	val := NewBool(true, true)
 	if val.IsNull() {
 		t.Fatal("it has to be not null")
 	}
 
-	val = Bool{Bool: false, Valid: false}
+	val = NewBool(false, false)
 	if !val.IsNull() {
 		t.Fatal("it has to be not null")
 	}
