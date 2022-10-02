@@ -63,7 +63,7 @@ func (b *Byte) UnmarshalJSON(data []byte) error {
 // String return string indicated the value.
 func (b Byte) String() string {
 	if !b.Valid {
-		return "<null>"
+		return "<nil>"
 	}
 	return string(b.Byte)
 }

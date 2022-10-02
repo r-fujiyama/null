@@ -71,7 +71,7 @@ func (s *String) IsEmpty() bool {
 // String return string indicated the value.
 func (s String) String() string {
 	if !s.Valid {
-		return "<null>"
+		return "<nil>"
 	}
 	return s.Str
 }

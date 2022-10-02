@@ -92,7 +92,7 @@ func (i *Int) IsZeroOrNull() bool {
 // String return string indicated the value.
 func (i Int) String() string {
 	if !i.Valid {
-		return "<null>"
+		return "<nil>"
 	}
 	return strconv.Itoa(int(i.Int))
 }

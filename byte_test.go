@@ -126,7 +126,7 @@ func TestByteString(t *testing.T) {
 	}
 
 	val = Byte{Byte: byte(0), Valid: false}
-	want = "<null>"
+	want = "<nil>"
 	got = val.String()
 	if got != want {
 		t.Fatalf("want %v, but %v:", want, got)

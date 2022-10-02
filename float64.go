@@ -95,7 +95,7 @@ func (f *Float64) IsZeroOrNull() bool {
 // String return string indicated the value.
 func (f Float64) String() string {
 	if !f.Valid {
-		return "<null>"
+		return "<nil>"
 	}
 	return strconv.FormatFloat(f.Float64, 'f', -1, 64)
 }
