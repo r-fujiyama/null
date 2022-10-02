@@ -1,4 +1,4 @@
-package nulltype
+package null
 
 import (
 	"database/sql/driver"
