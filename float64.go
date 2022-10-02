@@ -39,6 +39,9 @@ func (f *Float64) Scan(value interface{}) error {
 	case int:
 		f.Float64 = float64(data)
 		return nil
+	case int8:
+		f.Float64 = float64(data)
+		return nil
 	case int16:
 		f.Float64 = float64(data)
 		return nil

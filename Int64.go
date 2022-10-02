@@ -39,6 +39,9 @@ func (i *Int64) Scan(value interface{}) error {
 	case int:
 		i.Int64 = int64(data)
 		return nil
+	case int8:
+		i.Int64 = int64(data)
+		return nil
 	case int16:
 		i.Int64 = int64(data)
 		return nil
@@ -71,15 +74,15 @@ func (i Int64) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON decode data to the value.
 func (i *Int64) UnmarshalJSON(data []byte) error {
-	var fl *int64
-	if err := json.Unmarshal(data, &fl); err != nil {
+	var i64 *int64
+	if err := json.Unmarshal(data, &i64); err != nil {
 		return err
 	}
-	i.Valid = fl != nil
-	if fl == nil {
+	i.Valid = i64 != nil
+	if i64 == nil {
 		i.Int64 = 0
 	} else {
-		i.Int64 = *fl
+		i.Int64 = *i64
 	}
 	return nil
 }

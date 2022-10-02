@@ -39,6 +39,9 @@ func (i *Int) Scan(value interface{}) error {
 	case int:
 		i.Int = data
 		return nil
+	case int8:
+		i.Int = int(data)
+		return nil
 	case int16:
 		i.Int = int(data)
 		return nil
@@ -71,15 +74,15 @@ func (i Int) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON decode data to the value.
 func (i *Int) UnmarshalJSON(data []byte) error {
-	var fl *int
-	if err := json.Unmarshal(data, &fl); err != nil {
+	var integer *int
+	if err := json.Unmarshal(data, &integer); err != nil {
 		return err
 	}
-	i.Valid = fl != nil
-	if fl == nil {
+	i.Valid = integer != nil
+	if integer == nil {
 		i.Int = 0
 	} else {
-		i.Int = *fl
+		i.Int = *integer
 	}
 	return nil
 }

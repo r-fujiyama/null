@@ -56,6 +56,19 @@ func TestIntScanInt(t *testing.T) {
 	}
 }
 
+func TestIntScanInt8(t *testing.T) {
+	val := Int{}
+	var i8 int8 = 1
+	if err := val.Scan(i8); err != nil {
+		t.Fatal(err)
+	}
+
+	want := Int{Int: 1, Valid: true}
+	if val != want {
+		t.Fatalf("want %v, but %v:", want, val)
+	}
+}
+
 func TestIntScanInt16(t *testing.T) {
 	val := Int{}
 	var i16 int16 = 1

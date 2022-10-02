@@ -56,6 +56,19 @@ func TestFloat64ScanInt(t *testing.T) {
 	}
 }
 
+func TestFloat64ScanInt8(t *testing.T) {
+	val := Float64{}
+	var i8 int8 = 1
+	if err := val.Scan(i8); err != nil {
+		t.Fatal(err)
+	}
+
+	want := Float64{Float64: 1, Valid: true}
+	if val != want {
+		t.Fatalf("want %v, but %v:", want, val)
+	}
+}
+
 func TestFloat64ScanInt16(t *testing.T) {
 	val := Float64{}
 	var i16 int16 = 1
