@@ -1,7 +1,6 @@
 package nulltype
 
 import (
-	"database/sql"
 	"database/sql/driver"
 	"encoding/json"
 	"fmt"
@@ -9,7 +8,6 @@ import (
 
 // String represents a string that may be null.
 type String struct {
-	sql.NullInt16
 	String string
 	Valid  bool
 }
