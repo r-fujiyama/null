@@ -76,10 +76,10 @@ func (i *Int32) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	i.Valid = i32 != nil
-	if i32 == nil {
-		i.Int32 = 0
-	} else {
+	if i.Valid {
 		i.Int32 = *i32
+	} else {
+		i.Int32 = 0
 	}
 	return nil
 }

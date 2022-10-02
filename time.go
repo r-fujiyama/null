@@ -53,10 +53,10 @@ func (t *Time) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	t.Valid = tt != nil
-	if tt == nil {
-		t.Time = time.Time{}
-	} else {
+	if t.Valid {
 		t.Time = *tt
+	} else {
+		t.Time = time.Time{}
 	}
 	return nil
 }

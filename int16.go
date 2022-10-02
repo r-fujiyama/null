@@ -73,10 +73,10 @@ func (i *Int16) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	i.Valid = i16 != nil
-	if i16 == nil {
-		i.Int16 = 0
-	} else {
+	if i.Valid {
 		i.Int16 = *i16
+	} else {
+		i.Int16 = 0
 	}
 	return nil
 }

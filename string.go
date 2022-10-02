@@ -55,10 +55,10 @@ func (s *String) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	s.Valid = str != nil
-	if str == nil {
-		s.String = ""
-	} else {
+	if s.Valid {
 		s.String = *str
+	} else {
+		s.String = ""
 	}
 	return nil
 }

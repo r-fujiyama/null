@@ -82,10 +82,10 @@ func (f *Float32) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	f.Valid = f32 != nil
-	if f32 == nil {
-		f.Float32 = 0
-	} else {
+	if f.Valid {
 		f.Float32 = *f32
+	} else {
+		f.Float32 = 0
 	}
 	return nil
 }

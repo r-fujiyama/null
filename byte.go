@@ -52,10 +52,10 @@ func (b *Byte) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	b.Valid = bb != nil
-	if bb == nil {
-		b.Byte = byte(0)
-	} else {
+	if b.Valid {
 		b.Byte = *bb
+	} else {
+		b.Byte = byte(0)
 	}
 	return nil
 }

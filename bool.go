@@ -121,10 +121,10 @@ func (b *Bool) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	b.Valid = bb != nil
-	if bb == nil {
-		b.Bool = false
-	} else {
+	if b.Valid {
 		b.Bool = *bb
+	} else {
+		b.Bool = false
 	}
 	return nil
 }

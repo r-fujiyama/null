@@ -70,10 +70,10 @@ func (i *Int8) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	i.Valid = i8 != nil
-	if i8 == nil {
-		i.Int8 = 0
-	} else {
+	if i.Valid {
 		i.Int8 = *i8
+	} else {
+		i.Int8 = 0
 	}
 	return nil
 }
