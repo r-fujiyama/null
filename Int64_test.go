@@ -245,23 +245,14 @@ func TestInt64UnmarshalJSONError(t *testing.T) {
 	}
 }
 
-func TestInt64isZeroOrNullInt(t *testing.T) {
-	val := Int64{Int64: 1, Valid: true}
-	if val.IsZeroOrNull() {
-		t.Fatal("should not be zero or null")
-	}
-}
-
-func TestInt64isZeroOrNullZero(t *testing.T) {
+func TestInt64IsNull(t *testing.T) {
 	val := Int64{Int64: 0, Valid: true}
-	if !val.IsZeroOrNull() {
-		t.Fatal("it has to be zero or null")
+	if val.IsNull() {
+		t.Fatal("it has to be not null")
 	}
-}
 
-func TestInt64isZeroOrNullNull(t *testing.T) {
-	val := Int64{Int64: 0, Valid: false}
-	if !val.IsZeroOrNull() {
-		t.Fatal("it has to be zero or null")
+	val = Int64{Int64: 0, Valid: false}
+	if !val.IsNull() {
+		t.Fatal("it has to be not null")
 	}
 }

@@ -59,3 +59,8 @@ func (b *Byte) UnmarshalJSON(data []byte) error {
 	}
 	return nil
 }
+
+// IsNull returns true if Valid is false.
+func (b *Byte) IsNull() bool {
+	return !b.Valid
+}

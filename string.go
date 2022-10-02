@@ -67,3 +67,8 @@ func (s *String) UnmarshalJSON(data []byte) error {
 func (s *String) IsEmpty() bool {
 	return s.String == "" || !s.Valid
 }
+
+// IsNull returns true if Valid is false.
+func (s *String) IsNull() bool {
+	return !s.Valid
+}

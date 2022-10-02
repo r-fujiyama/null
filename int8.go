@@ -78,7 +78,7 @@ func (i *Int8) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-// IsZeroOrNull return true if int8 is 0 or Valid is false.
-func (i *Int8) IsZeroOrNull() bool {
-	return i.Int8 == 0 || !i.Valid
+// IsNull returns true if Valid is false.
+func (i *Int8) IsNull() bool {
+	return !i.Valid
 }

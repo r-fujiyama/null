@@ -116,3 +116,15 @@ func TestByteUnmarshalJSONError(t *testing.T) {
 		t.Fatal("no error message is output")
 	}
 }
+
+func TestByteIsNull(t *testing.T) {
+	val := Byte{Byte: byte(97), Valid: true}
+	if val.IsNull() {
+		t.Fatal("it has to be not null")
+	}
+
+	val = Byte{Byte: byte(0), Valid: false}
+	if !val.IsNull() {
+		t.Fatal("it has to be not null")
+	}
+}

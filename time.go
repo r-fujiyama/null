@@ -60,3 +60,8 @@ func (t *Time) UnmarshalJSON(data []byte) error {
 	}
 	return nil
 }
+
+// IsNull returns true if Valid is false.
+func (s *Time) IsNull() bool {
+	return !s.Valid
+}

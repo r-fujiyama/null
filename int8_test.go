@@ -206,23 +206,14 @@ func TestInt8UnmarshalJSONError(t *testing.T) {
 	}
 }
 
-func TestInt8isZeroOrNullInt(t *testing.T) {
-	val := Int8{Int8: 1, Valid: true}
-	if val.IsZeroOrNull() {
-		t.Fatal("should not be zero or null")
-	}
-}
-
-func TestInt8isZeroOrNullZero(t *testing.T) {
+func TestInt8IsNull(t *testing.T) {
 	val := Int8{Int8: 0, Valid: true}
-	if !val.IsZeroOrNull() {
-		t.Fatal("it has to be zero or null")
+	if val.IsNull() {
+		t.Fatal("it has to be not null")
 	}
-}
 
-func TestInt8isZeroOrNullNull(t *testing.T) {
-	val := Int8{Int8: 0, Valid: false}
-	if !val.IsZeroOrNull() {
-		t.Fatal("it has to be zero or null")
+	val = Int8{Int8: 0, Valid: false}
+	if !val.IsNull() {
+		t.Fatal("it has to be not null")
 	}
 }

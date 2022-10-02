@@ -258,23 +258,14 @@ func TestFloat64UnmarshalJSONError(t *testing.T) {
 	}
 }
 
-func TestFloat64isZeroOrNullFloat(t *testing.T) {
-	val := Float64{Float64: 1.1, Valid: true}
-	if val.IsZeroOrNull() {
-		t.Fatal("should not be zero or null")
-	}
-}
-
-func TestFloat64isZeroOrNullZero(t *testing.T) {
+func TestFloat64IsNull(t *testing.T) {
 	val := Float64{Float64: 0, Valid: true}
-	if !val.IsZeroOrNull() {
-		t.Fatal("it has to be zero or null")
+	if val.IsNull() {
+		t.Fatal("it has to be not null")
 	}
-}
 
-func TestFloat64isZeroOrNullNull(t *testing.T) {
-	val := Float64{Float64: 0, Valid: false}
-	if !val.IsZeroOrNull() {
-		t.Fatal("it has to be zero or null")
+	val = Float64{Float64: 0, Valid: false}
+	if !val.IsNull() {
+		t.Fatal("it has to be not null")
 	}
 }

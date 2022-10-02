@@ -219,23 +219,14 @@ func TestInt16UnmarshalJSONError(t *testing.T) {
 	}
 }
 
-func TestInt16isZeroOrNullInt(t *testing.T) {
-	val := Int16{Int16: 1, Valid: true}
-	if val.IsZeroOrNull() {
-		t.Fatal("should not be zero or null")
-	}
-}
-
-func TestInt16isZeroOrNullZero(t *testing.T) {
+func TestInt16IsNull(t *testing.T) {
 	val := Int16{Int16: 0, Valid: true}
-	if !val.IsZeroOrNull() {
-		t.Fatal("it has to be zero or null")
+	if val.IsNull() {
+		t.Fatal("it has to be not null")
 	}
-}
 
-func TestInt16isZeroOrNullNull(t *testing.T) {
-	val := Int16{Int16: 0, Valid: false}
-	if !val.IsZeroOrNull() {
-		t.Fatal("it has to be zero or null")
+	val = Int16{Int16: 0, Valid: false}
+	if !val.IsNull() {
+		t.Fatal("it has to be not null")
 	}
 }

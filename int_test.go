@@ -245,23 +245,14 @@ func TestIntUnmarshalJSONError(t *testing.T) {
 	}
 }
 
-func TestIntisZeroOrNullInt(t *testing.T) {
-	val := Int{Int: 1, Valid: true}
-	if val.IsZeroOrNull() {
-		t.Fatal("should not be zero or null")
-	}
-}
-
-func TestIntisZeroOrNullZero(t *testing.T) {
+func TestIntIsNull(t *testing.T) {
 	val := Int{Int: 0, Valid: true}
-	if !val.IsZeroOrNull() {
-		t.Fatal("it has to be zero or null")
+	if val.IsNull() {
+		t.Fatal("it has to be not null")
 	}
-}
 
-func TestIntisZeroOrNullNull(t *testing.T) {
-	val := Int{Int: 0, Valid: false}
-	if !val.IsZeroOrNull() {
-		t.Fatal("it has to be zero or null")
+	val = Int{Int: 0, Valid: false}
+	if !val.IsNull() {
+		t.Fatal("it has to be not null")
 	}
 }

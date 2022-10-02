@@ -232,23 +232,14 @@ func TestInt32UnmarshalJSONError(t *testing.T) {
 	}
 }
 
-func TestInt32isZeroOrNullInt(t *testing.T) {
-	val := Int32{Int32: 1, Valid: true}
-	if val.IsZeroOrNull() {
-		t.Fatal("should not be zero or null")
-	}
-}
-
-func TestInt32isZeroOrNullZero(t *testing.T) {
+func TestInt32IsNull(t *testing.T) {
 	val := Int32{Int32: 0, Valid: true}
-	if !val.IsZeroOrNull() {
-		t.Fatal("it has to be zero or null")
+	if val.IsNull() {
+		t.Fatal("it has to be not null")
 	}
-}
 
-func TestInt32isZeroOrNullNull(t *testing.T) {
-	val := Int32{Int32: 0, Valid: false}
-	if !val.IsZeroOrNull() {
-		t.Fatal("it has to be zero or null")
+	val = Int32{Int32: 0, Valid: false}
+	if !val.IsNull() {
+		t.Fatal("it has to be not null")
 	}
 }

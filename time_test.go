@@ -119,3 +119,15 @@ func TestTimeUnmarshalJSONError(t *testing.T) {
 		t.Fatal("no error message is output")
 	}
 }
+
+func TestTimeIsNull(t *testing.T) {
+	val := Time{Time: time.Time{}, Valid: true}
+	if val.IsNull() {
+		t.Fatal("it has to be not null")
+	}
+
+	val = Time{Time: time.Time{}, Valid: false}
+	if !val.IsNull() {
+		t.Fatal("it has to be not null")
+	}
+}

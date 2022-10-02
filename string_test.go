@@ -208,3 +208,15 @@ func TestStringIsEmptyNull(t *testing.T) {
 		t.Fatal("it has to be empty")
 	}
 }
+
+func TestStringIsNull(t *testing.T) {
+	val := String{String: "", Valid: true}
+	if val.IsNull() {
+		t.Fatal("it has to be not null")
+	}
+
+	val = String{String: "", Valid: false}
+	if !val.IsNull() {
+		t.Fatal("it has to be not null")
+	}
+}

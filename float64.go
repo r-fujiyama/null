@@ -90,7 +90,7 @@ func (f *Float64) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-// IsZeroOrNull return true if float64 is 0 or Valid is false.
-func (f *Float64) IsZeroOrNull() bool {
-	return f.Float64 == 0 || !f.Valid
+// IsNull returns true if Valid is false.
+func (f *Float64) IsNull() bool {
+	return !f.Valid
 }

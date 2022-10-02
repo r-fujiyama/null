@@ -203,3 +203,15 @@ func TestBoolUnmarshalJSONError(t *testing.T) {
 		t.Fatal("no error message is output")
 	}
 }
+
+func TestBoolIsNull(t *testing.T) {
+	val := Bool{Bool: true, Valid: true}
+	if val.IsNull() {
+		t.Fatal("it has to be not null")
+	}
+
+	val = Bool{Bool: false, Valid: false}
+	if !val.IsNull() {
+		t.Fatal("it has to be not null")
+	}
+}

@@ -258,23 +258,14 @@ func TestFloat32UnmarshalJSONError(t *testing.T) {
 	}
 }
 
-func TestFloat32isZeroOrNullFloat(t *testing.T) {
-	val := Float32{Float32: 1.1, Valid: true}
-	if val.IsZeroOrNull() {
-		t.Fatal("should not be zero or null")
-	}
-}
-
-func TestFloat32isZeroOrNullZero(t *testing.T) {
+func TestFloat32IsNull(t *testing.T) {
 	val := Float32{Float32: 0, Valid: true}
-	if !val.IsZeroOrNull() {
-		t.Fatal("it has to be zero or null")
+	if val.IsNull() {
+		t.Fatal("it has to be not null")
 	}
-}
 
-func TestFloat32isZeroOrNullNull(t *testing.T) {
-	val := Float32{Float32: 0, Valid: false}
-	if !val.IsZeroOrNull() {
-		t.Fatal("it has to be zero or null")
+	val = Float32{Float32: 0, Valid: false}
+	if !val.IsNull() {
+		t.Fatal("it has to be not null")
 	}
 }
