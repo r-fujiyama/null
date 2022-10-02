@@ -1,3 +1,3 @@
-module github.com/r-fujiyama/nulltype
+module nulltype
 
-go 1.17
+go 1.19
