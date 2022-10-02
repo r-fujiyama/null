@@ -36,16 +36,58 @@ func (b *Bool) Scan(value interface{}) error {
 		}
 		b.Bool = toBool
 		return nil
+	case uint8:
+		if data != 0 && data != 1 {
+			return fmt.Errorf("unsupported bool value: %d", value)
+		}
+		b.Bool = data == 1
+		return nil
+	case uint16:
+		if data != 0 && data != 1 {
+			return fmt.Errorf("unsupported bool value: %d", value)
+		}
+		b.Bool = data == 1
+		return nil
+	case uint32:
+		if data != 0 && data != 1 {
+			return fmt.Errorf("unsupported bool value: %d", value)
+		}
+		b.Bool = data == 1
+		return nil
+	case uint64:
+		if data != 0 && data != 1 {
+			return fmt.Errorf("unsupported bool value: %d", value)
+		}
+		b.Bool = data == 1
+		return nil
 	case int:
+		if data != 0 && data != 1 {
+			return fmt.Errorf("unsupported bool value: %d", value)
+		}
+		b.Bool = data == 1
+		return nil
+	case int8:
+		if data != 0 && data != 1 {
+			return fmt.Errorf("unsupported bool value: %d", value)
+		}
 		b.Bool = data == 1
 		return nil
 	case int16:
+		if data != 0 && data != 1 {
+			return fmt.Errorf("unsupported bool value: %d", value)
+		}
 		b.Bool = data == 1
 		return nil
 	case int32:
+		if data != 0 && data != 1 {
+			return fmt.Errorf("unsupported bool value: %d", value)
+		}
 		b.Bool = data == 1
 		return nil
 	case int64:
+		if data != 0 && data != 1 {
+			return fmt.Errorf("unsupported bool value: %d", value)
+		}
 		b.Bool = data == 1
 		return nil
 	case bool:

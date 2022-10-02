@@ -55,6 +55,65 @@ func TestBoolScanInt(t *testing.T) {
 	}
 }
 
+func TestBoolScanUint8(t *testing.T) {
+	val := Bool{}
+	if err := val.Scan(uint8(1)); err != nil {
+		t.Fatal(err)
+	}
+
+	want := Bool{Bool: true, Valid: true}
+	if val != want {
+		t.Fatalf("want %v, but %v:", want, val)
+	}
+}
+
+func TestBoolScanUint16(t *testing.T) {
+	val := Bool{}
+	if err := val.Scan(uint16(1)); err != nil {
+		t.Fatal(err)
+	}
+
+	want := Bool{Bool: true, Valid: true}
+	if val != want {
+		t.Fatalf("want %v, but %v:", want, val)
+	}
+}
+
+func TestBoolScanUint32(t *testing.T) {
+	val := Bool{}
+	if err := val.Scan(uint32(1)); err != nil {
+		t.Fatal(err)
+	}
+
+	want := Bool{Bool: true, Valid: true}
+	if val != want {
+		t.Fatalf("want %v, but %v:", want, val)
+	}
+}
+func TestBoolScanUint64(t *testing.T) {
+	val := Bool{}
+	if err := val.Scan(uint64(1)); err != nil {
+		t.Fatal(err)
+	}
+
+	want := Bool{Bool: true, Valid: true}
+	if val != want {
+		t.Fatalf("want %v, but %v:", want, val)
+	}
+}
+
+func TestBoolScanInt8(t *testing.T) {
+	val := Bool{}
+	if err := val.Scan(int8(1)); err != nil {
+		t.Fatal(err)
+	}
+
+	want := Bool{Bool: true, Valid: true}
+	if val != want {
+		t.Fatalf("want %v, but %v:", want, val)
+	}
+}
+
 func TestBoolScanInt16(t *testing.T) {
 	val := Bool{}
 	if err := val.Scan(int16(1)); err != nil {
@@ -107,6 +166,78 @@ func TestBoolScanStringParseError(t *testing.T) {
 	err := val.Scan("parse error")
 	if err == nil {
 		t.Fatalf("no parse error is output")
+	}
+}
+
+func TestBoolScanIntValueError(t *testing.T) {
+	val := Bool{}
+	err := val.Scan(2)
+	if err == nil {
+		t.Fatalf("no value error is output")
+	}
+}
+
+func TestBoolScanInt8ValueError(t *testing.T) {
+	val := Bool{}
+	err := val.Scan(int8(2))
+	if err == nil {
+		t.Fatalf("no value error is output")
+	}
+}
+
+func TestBoolScanInt16ValueError(t *testing.T) {
+	val := Bool{}
+	err := val.Scan(int16(2))
+	if err == nil {
+		t.Fatalf("no value error is output")
+	}
+}
+
+func TestBoolScanInt32ValueError(t *testing.T) {
+	val := Bool{}
+	err := val.Scan(int32(2))
+	if err == nil {
+		t.Fatalf("no value error is output")
+	}
+}
+
+func TestBoolScanInt64ValueError(t *testing.T) {
+	val := Bool{}
+	err := val.Scan(int64(2))
+	if err == nil {
+		t.Fatalf("no value error is output")
+	}
+}
+
+func TestBoolScanUint8ValueError(t *testing.T) {
+	val := Bool{}
+	err := val.Scan(uint8(2))
+	if err == nil {
+		t.Fatalf("no value error is output")
+	}
+}
+
+func TestBoolScanUint16ValueError(t *testing.T) {
+	val := Bool{}
+	err := val.Scan(uint16(2))
+	if err == nil {
+		t.Fatalf("no value error is output")
+	}
+}
+
+func TestBoolScanUint32ValueError(t *testing.T) {
+	val := Bool{}
+	err := val.Scan(uint32(2))
+	if err == nil {
+		t.Fatalf("no value error is output")
+	}
+}
+
+func TestBoolScanUint64ValueError(t *testing.T) {
+	val := Bool{}
+	err := val.Scan(uint64(2))
+	if err == nil {
+		t.Fatalf("no value error is output")
 	}
 }
 
