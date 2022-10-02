@@ -6,15 +6,13 @@
 [![Codecov](https://img.shields.io/codecov/c/github/r-fujiyama/nulltype/.svg?style=flat)](https://codecov.io/gh/r-fujiyama/nulltype/)
 [![Go Report Card](https://goreportcard.com/badge/github.com/r-fujiyama/nulltype)](https://goreportcard.com/report/github.com/r-fujiyama/nulltype)
 
-## Guide
-
 ## Installation
 
 ```sh
 $ go get -u github.com/r-fujiyama/nulltype
 ```
 
-### Example
+## Example
 
 ```go
 import (
