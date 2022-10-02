@@ -203,19 +203,3 @@ func TestBoolUnmarshalJSONError(t *testing.T) {
 		t.Fatal("no error message is output")
 	}
 }
-
-func TestBoolString(t *testing.T) {
-	val := Bool{Bool: true, Valid: true}
-	want := "true"
-	got := val.String()
-	if got != want {
-		t.Fatalf("want %v, but %v:", want, got)
-	}
-
-	val = Bool{Bool: false, Valid: false}
-	want = "<nil>"
-	got = val.String()
-	if got != want {
-		t.Fatalf("want %v, but %v:", want, got)
-	}
-}

@@ -265,19 +265,3 @@ func TestFloat64isZeroOrNullNull(t *testing.T) {
 		t.Fatal("it has to be zero or null")
 	}
 }
-
-func TestFloat64String(t *testing.T) {
-	val := Float64{Float64: 1.1, Valid: true}
-	want := "1.1"
-	got := val.String()
-	if got != want {
-		t.Fatalf("want %v, but %v:", want, got)
-	}
-
-	val = Float64{Float64: 0, Valid: false}
-	want = "<nil>"
-	got = val.String()
-	if got != want {
-		t.Fatalf("want %v, but %v:", want, got)
-	}
-}
