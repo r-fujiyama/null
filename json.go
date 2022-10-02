@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 )
 
-func JSONMarshal(t interface{}) ([]byte, error) {
+func jsonMarshal(t interface{}) ([]byte, error) {
 	buffer := &bytes.Buffer{}
 	encoder := json.NewEncoder(buffer)
 	encoder.SetEscapeHTML(false)

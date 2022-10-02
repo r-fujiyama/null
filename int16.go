@@ -68,7 +68,7 @@ func (i Int16) MarshalJSON() ([]byte, error) {
 	if !i.Valid {
 		return []byte("null"), nil
 	}
-	return JSONMarshal(i.Int16)
+	return jsonMarshal(i.Int16)
 }
 
 // UnmarshalJSON decode data to the value.

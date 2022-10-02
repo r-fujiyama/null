@@ -77,7 +77,7 @@ func (f Float32) MarshalJSON() ([]byte, error) {
 	if !f.Valid {
 		return []byte("null"), nil
 	}
-	return JSONMarshal(f.Float32)
+	return jsonMarshal(f.Float32)
 }
 
 // UnmarshalJSON decode data to the value.
