@@ -39,7 +39,7 @@ func (b Byte) Value() (driver.Value, error) {
 	if !b.Valid {
 		return nil, nil
 	}
-	return b.Byte, nil
+	return int64(b.Byte), nil
 }
 
 // MarshalJSON encode the value to JSON.
