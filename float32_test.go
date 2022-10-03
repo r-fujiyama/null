@@ -148,7 +148,7 @@ func TestFloat32ScanTypeError(t *testing.T) {
 func TestFloat32ValueFloat(t *testing.T) {
 	val := NewFloat32(1.1, true)
 	got, err := val.Value()
-	if got != float32(1.1) || err != nil {
+	if got != float64(float32(1.1)) || err != nil {
 		t.Fatalf("want %v, but %v:", 1.1, got)
 	}
 }
@@ -156,7 +156,7 @@ func TestFloat32ValueFloat(t *testing.T) {
 func TestFloat32ValueZero(t *testing.T) {
 	val := NewFloat32(0, true)
 	got, err := val.Value()
-	if got != float32(0.0) || err != nil {
+	if got != float64(float32(0.0)) || err != nil {
 		t.Fatalf("want %v, but %v:", 0.0, got)
 	}
 }
