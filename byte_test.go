@@ -42,7 +42,7 @@ func TestByteScanError(t *testing.T) {
 func TestByteValueByte(t *testing.T) {
 	val := NewByte(byte(97), true)
 	got, err := val.Value()
-	if got != byte(97) || err != nil {
+	if got != int64(97) || err != nil {
 		t.Fatalf("want %v, but %v:", byte(97), got)
 	}
 }
