@@ -8,6 +8,15 @@ import (
 )
 
 // Float32 represents a float32 that may be null.
+// When this structure is used to pass data to and from the DB, unintended data may be retrieved.
+// This is due to the following implementation.
+//
+//	func (f Float32) Value() (driver.Value, error) {
+//		if !f.Valid {
+//			return nil, nil
+//		}
+//		return float64(f.Float32), nil
+//	}
 type Float32 struct {
 	Float32 float32
 	Valid   bool
