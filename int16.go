@@ -4,6 +4,7 @@ import (
 	"database/sql/driver"
 	"encoding/json"
 	"fmt"
+	"math"
 	"strconv"
 )
 
@@ -42,6 +43,9 @@ func (i *Int16) Scan(value interface{}) error {
 		i.Int16 = int16(i16)
 		return nil
 	case int:
+		if data > math.MaxInt16 || data < math.MinInt16 {
+			return fmt.Errorf("maximum or minimum value of Int16 exceeded: %d", data)
+		}
 		i.Int16 = int16(data)
 		return nil
 	case int8:

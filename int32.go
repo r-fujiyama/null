@@ -4,6 +4,7 @@ import (
 	"database/sql/driver"
 	"encoding/json"
 	"fmt"
+	"math"
 	"strconv"
 )
 
@@ -42,6 +43,9 @@ func (i *Int32) Scan(value interface{}) error {
 		i.Int32 = int32(i32)
 		return nil
 	case int:
+		if data > math.MaxInt32 || data < math.MinInt32 {
+			return fmt.Errorf("maximum or minimum value of Int32 exceeded: %d", data)
+		}
 		i.Int32 = int32(data)
 		return nil
 	case int8:

@@ -3,6 +3,7 @@ package null
 import (
 	"bytes"
 	"encoding/json"
+	"math"
 	"strings"
 	"testing"
 )
@@ -53,6 +54,24 @@ func TestInt32ScanInt(t *testing.T) {
 	want := NewInt32(1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
+	}
+}
+
+func TestInt32ScanMaximumValueOver(t *testing.T) {
+	val := Int32{}
+	var i int = math.MaxInt32 + 1
+	err := val.Scan(i)
+	if err == nil || err.Error() != "maximum or minimum value of Int32 exceeded: 2147483648" {
+		t.Fatalf("want %v, but %v:", "maximum or minimum value of Int32 exceeded: 2147483648", err)
+	}
+}
+
+func TestInt32ScanMinimumValueOver(t *testing.T) {
+	val := Int32{}
+	var i int = math.MinInt32 - 1
+	err := val.Scan(i)
+	if err == nil || err.Error() != "maximum or minimum value of Int32 exceeded: -2147483649" {
+		t.Fatalf("want %v, but %v:", "maximum or minimum value of Int32 exceeded: -2147483649", err)
 	}
 }
 

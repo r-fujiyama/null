@@ -3,6 +3,7 @@ package null
 import (
 	"bytes"
 	"encoding/json"
+	"math"
 	"strings"
 	"testing"
 )
@@ -53,6 +54,24 @@ func TestInt16ScanInt(t *testing.T) {
 	want := NewInt16(1, true)
 	if val != want {
 		t.Fatalf("want %v, but %v:", want, val)
+	}
+}
+
+func TestInt16ScanMaximumValueOver(t *testing.T) {
+	val := Int16{}
+	var i int = math.MaxInt16 + 1
+	err := val.Scan(i)
+	if err == nil || err.Error() != "maximum or minimum value of Int16 exceeded: 32768" {
+		t.Fatalf("want %v, but %v:", "maximum or minimum value of Int16 exceeded: 32768", err)
+	}
+}
+
+func TestInt16ScanMinimumValueOver(t *testing.T) {
+	val := Int16{}
+	var i int = math.MinInt16 - 1
+	err := val.Scan(i)
+	if err == nil || err.Error() != "maximum or minimum value of Int16 exceeded: -32769" {
+		t.Fatalf("want %v, but %v:", "maximum or minimum value of Int16 exceeded: -32769", err)
 	}
 }
 
